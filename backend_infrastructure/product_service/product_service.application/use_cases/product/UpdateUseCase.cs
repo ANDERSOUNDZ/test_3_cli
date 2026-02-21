@@ -7,15 +7,22 @@ namespace product_service
         public async Task<bool> ExecuteAsync(Guid id, ProductRequest request, CancellationToken cancellationToken)
         {
             var entity = await _productRepository.GetByIdAsync(id, cancellationToken);
-
             if (entity == null) return false;
-
             entity.Name = request.Name;
             entity.Description = request.Description;
             entity.Category = request.Category;
             entity.Image = request.Image;
             entity.Price = request.Price;
-            entity.Stock = request.Stock;
+
+            if (request.Stock < entity.Stock)
+            {
+                int diferencia = entity.Stock - request.Stock;
+                entity.UpdateStock(diferencia, false);
+            }
+            else
+            {
+                entity.Stock = request.Stock;
+            }
 
             await _productRepository.UpdateAsync(entity, cancellationToken);
             return true;

@@ -8,7 +8,7 @@ namespace product_service
     {
         public async Task<IEnumerable<ProductEntity>> GetAllAsync(string? category, string? name, CancellationToken cancellationToken)
         {
-            var query = _context.Products.AsQueryable();
+            var query = _context.Products.AsNoTracking().AsQueryable();
 
             if (!string.IsNullOrEmpty(category))
                 query = query.Where(p => p.Category == category);

@@ -47,17 +47,23 @@ namespace product_service.adapters.input.controllers.product
 
         [HttpPut("update_product/{id}")]
         [ServiceFilter(typeof(ValidationFilter<ProductRequest>))]
-        public async Task<IActionResult> Update(
-            Guid id,
-            [FromBody] ProductRequest request,
-            CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Update(Guid id,[FromBody] ProductRequest request,CancellationToken cancellationToken = default)
         {
-            var result = await _executor.ExecuteAsync(id, request, cancellationToken);
-
-            if (!result)
-                return BadRequestResponse(ApiMessage.BadRequest, "No se pudo actualizar. Producto no encontrado.");
-
-            return OkResponse(true, ApiMessage.OperationSuccess);
+            try
+            {
+                var result = await _executor.ExecuteAsync(id, request, cancellationToken);
+                if (!result)
+                    return BadRequestResponse(ApiMessage.BadRequest, "No se pudo actualizar. Producto no encontrado.");
+                return OkResponse(true, ApiMessage.OperationSuccess);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequestResponse(ApiMessage.ValidationError, ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return InternalErrorResponse(ex);
+            }
         }
 
         [HttpDelete("delete_product/{id}")]

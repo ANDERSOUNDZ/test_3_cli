@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-namespace product_service.ports.dtos.settings
+﻿namespace product_service.ports.dtos.settings
 {
     public class ApiResponse<Response>
     {
