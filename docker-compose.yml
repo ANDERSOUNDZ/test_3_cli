@@ -25,6 +25,8 @@ services:
       - "8081:8080"
     volumes:
       - ./backend_infrastructure/product_service:/app
+      - /app/product_service/bin
+      - /app/product_service/obj
     depends_on:
       db-products:
         condition: service_healthy
@@ -55,6 +57,8 @@ services:
       - "8082:8080"
     volumes:
       - ./backend_infrastructure/transaction_service:/app
+      - /app/transaction_service/bin
+      - /app/transaction_service/obj
     depends_on:
       db-transactions:
         condition: service_healthy
