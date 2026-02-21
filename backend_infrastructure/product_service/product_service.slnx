@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="product_service.application/product_service.application.csproj" />
+  <Project Path="product_service.data/product_service.data.csproj" />
+  <Project Path="product_service.domain/product_service.domain.csproj" />
+  <Project Path="product_service.ports/product_service.ports.csproj" />
   <Project Path="product_service/product_service.csproj" />
 </Solution>

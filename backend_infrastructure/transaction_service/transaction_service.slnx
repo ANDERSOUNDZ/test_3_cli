@@ -1,3 +1,7 @@
 <Solution>
+  <Project Path="transaction_service.application/transaction_service.application.csproj" Id="18a1ec44-97a8-435d-8f49-b185d56dee22" />
+  <Project Path="transaction_service.data/transaction_service.data.csproj" Id="b391be41-1e7f-4cc0-8f31-92d4ddb81342" />
+  <Project Path="transaction_service.domain/transaction_service.domain.csproj" Id="78d38256-9a3c-40a9-aaad-43c839647dbf" />
+  <Project Path="transaction_service.ports/transaction_service.ports.csproj" Id="8ac86fde-3229-4694-b5c3-b8a51dc1f3ce" />
   <Project Path="transaction_service/transaction_service.csproj" />
 </Solution>
