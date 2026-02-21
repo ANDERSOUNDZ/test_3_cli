@@ -1,4 +1,5 @@
 ﻿using transaction_service.host.extensions;
+using Microsoft.AspNetCore.Builder;
 
 namespace transaction_service.host
 {
@@ -22,7 +23,7 @@ namespace transaction_service.host
             //app.UseAutoMigrations();
             if (app.Environment.IsDevelopment())
             {
-                //app.UseSwagger();
+                app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Transaction_Service API v1");
