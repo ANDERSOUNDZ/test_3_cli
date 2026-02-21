@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.13" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.13">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.13" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="9.0.13" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.13" />
@@ -16,10 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\product_service.domain\product_service.domain.csproj" />
     <ProjectReference Include="..\product_service.ports\product_service.ports.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="migrations\" />
   </ItemGroup>
 
 </Project>

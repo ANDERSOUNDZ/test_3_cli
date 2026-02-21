@@ -11,7 +11,8 @@ services:
       test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Products123*' -C -Q 'SELECT 1'"]
       interval: 10s
       timeout: 5s
-      retries: 5
+      retries: 10
+
   product-service:
     build: 
       context: ./backend_infrastructure/product_service
@@ -35,7 +36,7 @@ services:
       - ACCEPT_EULA=Y
       - MSSQL_SA_PASSWORD=Transactions123*
     ports:
-      - "1434:1433"
+      - "1434:1433" # Puerto diferente para no chocar con la otra DB
     healthcheck:
       test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P 'Transactions123*' -C -Q 'SELECT 1'"]
       interval: 10s
@@ -57,3 +58,14 @@ services:
     depends_on:
       db-transactions:
         condition: service_healthy
+
+  store-frontend:
+    build:
+      context: ./frontend_infrastructure/store_frontend
+      dockerfile: Dockerfile
+    container_name: store_frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - product-service
+      - transaction-service

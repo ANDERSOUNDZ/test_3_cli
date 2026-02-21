@@ -11,5 +11,11 @@ namespace transaction_service.adapters.input.controllers.transaction
         {
             _executor = executor;
         }
+
+        [HttpGet("test")]
+        public IActionResult GetTest() {
+            var data = new { Message = "API funcionando correctamente" };
+            return OkResponse(data);
+        }
     }
 }

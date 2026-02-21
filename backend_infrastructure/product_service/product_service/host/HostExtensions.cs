@@ -19,16 +19,16 @@ namespace product_service.host
         }
         public static WebApplication UseHexagonal(this WebApplication app)
         {
-            //app.UseAutoMigrations();
             if (app.Environment.IsDevelopment())
             {
-                //app.UseSwagger();
+                app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
                     options.SwaggerEndpoint("/swagger/v1/swagger.json", "Product_Service API v1");
                     options.RoutePrefix = "swagger";
                 });
             }
+
             if (!app.Environment.IsDevelopment())
             {
                 app.UseHsts();

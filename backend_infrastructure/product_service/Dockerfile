@@ -1,14 +1,13 @@
 FROM mcr.microsoft.com/dotnet/sdk:9.0
 WORKDIR /app
 
-COPY ["product_service.csproj", "./"]
-COPY ["product_service.data/product_service.data.csproj", "product_service.data/"]
-COPY ["product_service.domain/product_service.domain.csproj", "product_service.domain/"]
-COPY ["product_service.ports/product_service.ports.csproj", "product_service.ports/"]
-COPY ["product_service.application/product_service.application.csproj", "product_service.application/"]
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
 
-RUN dotnet restore "product_service.csproj"
-
+# Copiamos los archivos
 COPY . .
 
-ENTRYPOINT ["dotnet", "watch", "run", "--urls", "http://0.0.0.0:8080", "--non-interactive"]
+# Solo damos permisos, no ejecutamos limpiezas pesadas aquí
+RUN chmod +x ./entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/app/entrypoint.sh"]
