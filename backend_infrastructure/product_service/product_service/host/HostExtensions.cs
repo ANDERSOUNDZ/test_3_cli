@@ -10,9 +10,9 @@ namespace product_service.host
             var config = builder.Configuration;
             services.AddDatabaseSetup(config);
             services.AddSwaggerDocumentation();
-            //services.AddRepositories();
-            //services.AddUseCases();
-            //services.AddValidators();
+            services.AddRepositories();
+            services.AddUseCases();
+            services.AddValidators();
             services.AddControllers();
 
             return builder;

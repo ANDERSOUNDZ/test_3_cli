@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\product_service.ports\product_service.ports.csproj" />
+  </ItemGroup>
+
 </Project>

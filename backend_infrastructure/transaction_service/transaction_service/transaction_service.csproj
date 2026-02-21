@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.13" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.1.4" />
@@ -14,10 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="adapters\" />
+    <Folder Include="adapters\input\validators\transaction\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\transaction_service.application\transaction_service.application.csproj" />
     <ProjectReference Include="..\transaction_service.data\transaction_service.data.csproj" />
   </ItemGroup>
 

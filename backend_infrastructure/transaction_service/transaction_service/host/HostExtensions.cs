@@ -10,8 +10,8 @@ namespace transaction_service.host
             var config = builder.Configuration;
             services.AddDatabaseSetup(config);
             services.AddSwaggerDocumentation();
-            //services.AddRepositories();
-            //services.AddUseCases();
+            services.AddRepositories();
+            services.AddUseCases();
             //services.AddValidators();
             services.AddControllers();
 
@@ -25,7 +25,7 @@ namespace transaction_service.host
                 //app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Product_Service API v1");
+                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Transaction_Service API v1");
                     options.RoutePrefix = "swagger";
                 });
             }

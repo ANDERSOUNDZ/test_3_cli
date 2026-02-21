@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\product_service.domain\product_service.domain.csproj" />
+    <ProjectReference Include="..\product_service.ports\product_service.ports.csproj" />
   </ItemGroup>
 
   <ItemGroup>

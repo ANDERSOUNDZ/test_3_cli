@@ -11,9 +11,9 @@ namespace transaction_service.host.extensions
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Products Services API",
+                    Title = "Transaction Services API",
                     Version = "v1",
-                    Description = "Documentación de la API de Products Services",
+                    Description = "Documentación de la API de Transacion Services",
                     Contact = new OpenApiContact
                     {
                         Name = "Anderson Chanchay",

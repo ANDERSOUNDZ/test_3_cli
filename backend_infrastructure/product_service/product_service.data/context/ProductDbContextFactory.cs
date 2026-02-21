@@ -8,7 +8,7 @@ namespace product_service.data.context
     {
         public ProductDbContext CreateDbContext(string[] args)
         {
-            var apiProjectPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "../product-api"));
+            var apiProjectPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "../product_service"));
 
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(apiProjectPath)

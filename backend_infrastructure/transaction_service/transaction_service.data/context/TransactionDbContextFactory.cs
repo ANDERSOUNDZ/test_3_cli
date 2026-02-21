@@ -8,7 +8,7 @@ namespace transaction_service.data.context
     {
         public TransactionDbContext CreateDbContext(string[] args)
         {
-            var apiProjectPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "../product-api"));
+            var apiProjectPath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "../transaction_service"));
 
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(apiProjectPath)

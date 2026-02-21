@@ -14,4 +14,13 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="migrations\" />
+    <Folder Include="configurations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\transaction_service.ports\transaction_service.ports.csproj" />
+  </ItemGroup>
+
 </Project>
