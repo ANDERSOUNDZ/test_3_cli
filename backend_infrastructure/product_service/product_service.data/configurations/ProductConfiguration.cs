@@ -6,17 +6,19 @@ namespace product_service.data.configurations
 {
     public class ProductConfiguration : IEntityTypeConfiguration<ProductEntity>
     {
-        public void Configure(EntityTypeBuilder<ProductEntity> product)
+        public void Configure(EntityTypeBuilder<ProductEntity> builder)
         {
-            product.ToTable("tb_product");
-            product.HasKey(p => p.Id);
-            product.Property(p => p.Id).IsRequired();
-            product.Property(p => p.Name).IsRequired().HasMaxLength(200);
-            product.Property(p => p.Description).HasMaxLength(1000);
-            product.Property(p => p.Category).HasMaxLength(100);
-            product.Property(p => p.Image).HasMaxLength(500);
-            product.Property(p => p.Price).HasColumnType("decimal(18,2)").IsRequired();
-            product.Property(p => p.Stock).IsRequired();
+            builder.ToTable("tb_product");
+            builder.HasKey(p => p.Id);
+            builder.Property(p => p.Id)
+                   .HasMaxLength(32)
+                   .IsRequired();
+            builder.Property(p => p.Name).IsRequired().HasMaxLength(200);
+            builder.Property(p => p.Description).HasMaxLength(1000);
+            builder.Property(p => p.Category).HasMaxLength(100);
+            builder.Property(p => p.Image).HasMaxLength(500);
+            builder.Property(p => p.Price).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(p => p.Stock).IsRequired();
         }
     }
 }

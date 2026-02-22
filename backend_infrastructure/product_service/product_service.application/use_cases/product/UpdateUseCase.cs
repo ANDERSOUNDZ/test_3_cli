@@ -4,16 +4,16 @@ namespace product_service
 {
     public partial class ProductUseCase : IProductUseCase
     {
-        public async Task<bool> ExecuteAsync(Guid id, ProductRequest request, CancellationToken cancellationToken)
+        public async Task<bool> ExecuteAsync(string id, ProductRequest request, CancellationToken cancellationToken)
         {
             var entity = await _productRepository.GetByIdAsync(id, cancellationToken);
+
             if (entity == null) return false;
             entity.Name = request.Name;
             entity.Description = request.Description;
             entity.Category = request.Category;
             entity.Image = request.Image;
             entity.Price = request.Price;
-
             if (request.Stock < entity.Stock)
             {
                 int diferencia = entity.Stock - request.Stock;
@@ -23,7 +23,6 @@ namespace product_service
             {
                 entity.Stock = request.Stock;
             }
-
             await _productRepository.UpdateAsync(entity, cancellationToken);
             return true;
         }

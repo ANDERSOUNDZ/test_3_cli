@@ -17,6 +17,8 @@ namespace transaction_service.host.extensions
                     sqlOptions.MigrationsAssembly("transaction_service.data");
                 });
 
+                options.ConfigureWarnings(w => w.Ignore(Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.PendingModelChangesWarning));
+
                 if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development")
                 {
                     options.EnableDetailedErrors();

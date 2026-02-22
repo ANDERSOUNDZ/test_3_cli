@@ -34,7 +34,7 @@ namespace product_service.adapters.input.controllers.product
 
         [HttpGet("get_product/{id}")]
         public async Task<IActionResult> GetById(
-            Guid id,
+            string id,
             CancellationToken cancellationToken = default)
         {
             var result = await _executor.ExecuteAsync(new GetProductRequest(id), cancellationToken);
@@ -47,7 +47,7 @@ namespace product_service.adapters.input.controllers.product
 
         [HttpPut("update_product/{id}")]
         [ServiceFilter(typeof(ValidationFilter<ProductRequest>))]
-        public async Task<IActionResult> Update(Guid id,[FromBody] ProductRequest request,CancellationToken cancellationToken = default)
+        public async Task<IActionResult> Update(string id, [FromBody] ProductRequest request,CancellationToken cancellationToken = default)
         {
             try
             {
@@ -68,7 +68,7 @@ namespace product_service.adapters.input.controllers.product
 
         [HttpDelete("delete_product/{id}")]
         public async Task<IActionResult> Delete(
-            Guid id,
+            string id,
             CancellationToken cancellationToken = default)
         {
             var result = await _executor.ExecuteAsync(new DeleteProductRequest(id), cancellationToken);

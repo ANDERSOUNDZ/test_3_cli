@@ -8,11 +8,11 @@ namespace product_service
         public async Task<ProductResponse?> ExecuteAsync(GetProductRequest request, CancellationToken cancellationToken)
         {
             var product = await _productRepository.GetByIdAsync(request.Id, cancellationToken);
-
             if (product == null) return null;
 
             return new ProductResponse
             {
+                Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
                 Category = product.Category,

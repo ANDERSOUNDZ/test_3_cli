@@ -1,48 +1,44 @@
 #!/bin/bash
-# Eliminamos 'set -e' para que un error en las migraciones no detenga todo el contenedor
+echo "Limpiar migraciones anteriores"
 set +e 
 
-# 1. Limpieza rápida (rutas directas)
+echo "Limpiar archivos OBJ y BIN para evitar conflictos"
 rm -rf /app/product_service/bin /app/product_service/obj
 rm -rf /app/product_service.data/bin /app/product_service.data/obj
-
 cd /app/product_service
 
-echo "--- RESTAURANDO Y COMPILANDO ---"
 dotnet restore
 dotnet build --no-restore
 
-echo "--- ESPERANDO A SQL SERVER ---"
-# Bucle de espera simple
+echo "Revisando coneccion a SQL Server"
 until dotnet ef database update --project ../product_service.data/product_service.data.csproj --startup-project product_service.csproj 2>/dev/null; do
   echo "SQL Server no disponible... reintentando"
   sleep 2
 done
 
-# 2. CONDICIONAL INTELIGENTE
-# Solo borramos y generamos si la carpeta NO existe físicamente.
-# Si ya existe, asumimos que ya hay una estructura.
+echo "Limpieza e inicio de migraciónes"
 if [ ! -d "../product_service.data/migrations" ]; then
-    echo "--- CARPETA MIGRATIONS NO ENCONTRADA: GENERANDO ---"
+    echo "Carpeta migración no encontrada, se esta creando la carpeta y generando la migración inicial"
     dotnet ef migrations add InitialCreate \
       --project ../product_service.data/product_service.data.csproj \
       --startup-project product_service.csproj \
       --output-dir migrations
     
-    echo "--- INTENTANDO APLICAR MIGRACIÓN ---"
-    # Usamos || true para que si la tabla ya existe en la DB, no detenga el script
+    echo "Agregando la migracion inicial, si la tabla ya existe en la DB, no se detiene el script"
     dotnet ef database update \
       --project ../product_service.data/product_service.data.csproj \
       --startup-project product_service.csproj || echo "Aviso: La base de datos ya tenía estructura o hubo un conflicto menor."
 else
-    echo "--- MIGRACIONES DETECTADAS: SINCRONIZANDO ---"
+    echo "Integrando la migracion"
     dotnet ef database update \
       --project ../product_service.data/product_service.data.csproj \
       --startup-project product_service.csproj || echo "La base de datos ya está actualizada."
 fi
 
-# Volvemos a activar el modo estricto para la ejecución de la app
+echo "Activar modo estrcto para que el contenedor se detenga si hay errores críticos"
 set -e
-
-echo "--- PRODUCT SERVICE LISTO ---"
+echo "Compilando y ejecutando el servicio de productos"
+dotnet clean
+dotnet build
+echo "Servicio de productos levantado."
 dotnet watch run --urls http://0.0.0.0:8080 --non-interactive

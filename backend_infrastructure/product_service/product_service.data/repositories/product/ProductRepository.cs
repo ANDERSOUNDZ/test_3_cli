@@ -19,7 +19,7 @@ namespace product_service
             return await query.ToListAsync(cancellationToken);
         }
 
-        public async Task<ProductEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken)
+        public async Task<ProductEntity?> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
         }
@@ -36,7 +36,7 @@ namespace product_service
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
+        public async Task DeleteAsync(string id, CancellationToken cancellationToken)
         {
             var product = await GetByIdAsync(id, cancellationToken);
             if (product != null)

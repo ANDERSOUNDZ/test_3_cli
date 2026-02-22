@@ -8,15 +8,16 @@ namespace transaction_service
         public async Task<IEnumerable<TransactionResponse>> ExecuteAsync(TransactionFilterRequest filter, CancellationToken cancellationToken)
         {
             var data = await _transactionRepository.GetFilteredAsync(filter.StartDate, filter.EndDate, filter.Type, cancellationToken);
+
             return data
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Take(filter.PageSize)
                 .Select(transaction => new TransactionResponse
                 {
                     Id = transaction.Id,
+                    ProductId = transaction.ProductId,
                     Date = transaction.Date,
                     TransactionType = transaction.TransactionType,
-                    ProductId = transaction.ProductId,
                     ProductName = transaction.ProductName,
                     Quantity = transaction.Quantity,
                     UnitPrice = transaction.UnitPrice,

@@ -1,4 +1,4 @@
 ﻿namespace product_service.ports.dtos.request
 {
-    public record DeleteProductRequest(Guid Id);
+    public record DeleteProductRequest(string Id);
 }

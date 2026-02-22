@@ -5,7 +5,7 @@ namespace transaction_service
 {
     public partial interface ITransactionUseCase
     {
-        Task<Guid> ExecuteAsync(TransactionRequest request, CancellationToken cancellationToken);
+        Task<string> ExecuteAsync(TransactionRequest request, CancellationToken cancellationToken);
         Task<IEnumerable<TransactionResponse>> ExecuteAsync(TransactionFilterRequest filter, CancellationToken cancellationToken);
     }
 }

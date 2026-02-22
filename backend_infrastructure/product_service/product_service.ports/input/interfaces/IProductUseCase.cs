@@ -5,10 +5,10 @@ namespace product_service
 {
     public partial interface IProductUseCase
     {
-        Task<Guid> ExecuteAsync(ProductRequest request, CancellationToken cancellationToken);
+        Task<string> ExecuteAsync(ProductRequest request, CancellationToken cancellationToken);
         Task<IEnumerable<ProductResponse>> ExecuteAsync(ProductFilterRequest request, CancellationToken cancellationToken);
         Task<ProductResponse?> ExecuteAsync(GetProductRequest request, CancellationToken cancellationToken);
-        Task<bool> ExecuteAsync(Guid id, ProductRequest request, CancellationToken cancellationToken);
+        Task<bool> ExecuteAsync(string id, ProductRequest request, CancellationToken cancellationToken);
         Task<bool> ExecuteAsync(DeleteProductRequest request, CancellationToken cancellationToken);
     }
 }

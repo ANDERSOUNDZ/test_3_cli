@@ -17,6 +17,7 @@ namespace product_service
                 .Take(pageSize)
                 .Select(product => new ProductResponse
                 {
+                    Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
                     Category = product.Category,

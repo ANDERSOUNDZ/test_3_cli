@@ -5,11 +5,11 @@ namespace product_service
 {
     public partial class ProductUseCase : IProductUseCase
     {
-        public async Task<Guid> ExecuteAsync(ProductRequest request, CancellationToken cancellationToken)
+        public async Task<string> ExecuteAsync(ProductRequest request, CancellationToken cancellationToken)
         {
             var entity = new ProductEntity
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString("N"),
                 Name = request.Name,
                 Description = request.Description,
                 Category = request.Category,
@@ -17,7 +17,6 @@ namespace product_service
                 Price = request.Price,
                 Stock = request.Stock
             };
-
             await _productRepository.AddAsync(entity, cancellationToken);
             return entity.Id;
         }
