@@ -13,7 +13,7 @@ import { Notification } from '../../../core/services/notification';
   styleUrl: './product-edit.css',
 })
 export class ProductEdit implements OnInit {
-private fb = inject(FormBuilder);
+  private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private productService = inject(ProductService);
@@ -39,7 +39,7 @@ private fb = inject(FormBuilder);
       category: ['', [Validators.required]],
       image: [''],
       price: [0, [Validators.required, Validators.min(0.01)]],
-      stock: [0, [Validators.required, Validators.min(0)]]
+      stock: [0, [Validators.required, Validators.min(0)]],
     });
   }
 
@@ -49,7 +49,7 @@ private fb = inject(FormBuilder);
         this.editForm.patchValue(res.data);
         this.imagePreview.set(res.data.image);
       },
-      error: () => this.notification.notify('No se pudo cargar el producto', true)
+      error: () => this.notification.notify('No se pudo cargar el producto', true),
     });
   }
 
@@ -70,7 +70,7 @@ private fb = inject(FormBuilder);
           this.notification.notify('Producto actualizado con éxito');
           this.router.navigate(['/admin']);
         },
-        error: () => this.notification.notify('Error al actualizar', true)
+        error: () => this.notification.notify('Error al actualizar', true),
       });
     }
   }

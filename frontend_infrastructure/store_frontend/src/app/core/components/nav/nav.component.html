@@ -1,9 +1,12 @@
 <mat-sidenav-container class="main-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
-    
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
     <div class="logo-section">
       <div class="logo-icon">
         <mat-icon>handyman</mat-icon>
@@ -19,12 +22,11 @@
       <a class="nav-item" routerLink="/admin" routerLinkActive="active-item">
         <mat-icon>list</mat-icon>
         <span>Administrador de Productos</span>
-      </a>      
+      </a>
       <a class="nav-item" routerLink="/transactions" routerLinkActive="active-item">
         <mat-icon>swap_vert</mat-icon>
         <span>Movimiento de tienda</span>
       </a>
-      
     </nav>
   </mat-sidenav>
 

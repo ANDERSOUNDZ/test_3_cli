@@ -4,9 +4,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
 import { ProductCard } from '../product-card/product-card';
 import { ProductService } from '../../../core/services/product-service';
+import { MatDialog } from '@angular/material/dialog';
+import { CheckoutModal } from '../../../shared/components/checkout-modal/checkout-modal';
+import { Product } from '../../../core/models/product';
 
 @Component({
   selector: 'app-product-list',
@@ -17,19 +19,17 @@ import { ProductService } from '../../../core/services/product-service';
     MatIconModule,
     MatButtonModule,
     ProductCard,
-    RouterLink,
   ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
 export class ProductList implements OnInit {
   productService = inject(ProductService);
-  
   searchQuery = signal('');
   selectedCategory = signal('all');
-
+  private dialog = inject(MatDialog);
   categories = computed(() => {
-    const allCats = this.productService.products().map(p => p.category);
+    const allCats = this.productService.products().map((p) => p.category);
     return [...new Set(allCats)];
   });
 
@@ -39,11 +39,11 @@ export class ProductList implements OnInit {
     const cat = this.selectedCategory();
 
     if (cat !== 'all') {
-      list = list.filter(p => p.category === cat);
+      list = list.filter((p) => p.category === cat);
     }
 
     if (query) {
-      list = list.filter(p => p.name.toLowerCase().includes(query));
+      list = list.filter((p) => p.name.toLowerCase().includes(query));
     }
 
     return list;
@@ -55,5 +55,12 @@ export class ProductList implements OnInit {
 
   onSearch(event: Event) {
     this.searchQuery.set((event.target as HTMLInputElement).value);
+  }
+
+  openCheckoutFromList(product: Product) {
+    this.dialog.open(CheckoutModal, {
+      data: product,
+      panelClass: 'custom-bento-dialog',
+    });
   }
 }

@@ -1,4 +1,3 @@
-/* --- CONTENEDOR PRINCIPAL --- */
 .admin-container {
   padding: 40px;
   max-width: 1200px;
@@ -22,7 +21,6 @@
   letter-spacing: -0.5px;
 }
 
-/* --- BUSCADOR ESTILO BENTO --- */
 .search-field {
   width: 100%;
   margin-bottom: 28px;
@@ -43,7 +41,6 @@
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
-/* --- TABLA GLASSMORPHISM --- */
 .table-glass-container {
   background: rgba(20, 20, 20, 0.6);
   backdrop-filter: blur(15px);
@@ -87,7 +84,6 @@
   font-size: 0.95rem;
 }
 
-/* --- ELEMENTOS DE CELDA --- */
 .admin-table-img {
   width: 55px;
   height: 55px;
@@ -112,7 +108,6 @@
   font-weight: 700;
 }
 
-/* --- BOTONES DE ACCIÓN (NUEVOS) --- */
 .action-group {
   display: flex;
   gap: 10px;
@@ -148,7 +143,6 @@
 .mini-btn.edit:hover { background: rgba(250, 204, 21, 0.1); color: #facc15; }
 .mini-btn.delete:hover { background: rgba(239, 68, 68, 0.1); color: #ef4444; }
 
-/* --- BOTÓN NUEVO PRODUCTO --- */
 .action-btn {
   background: #fff;
   color: #000;
@@ -170,7 +164,6 @@
   box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15);
 }
 
-/* --- PAGINADOR --- */
 .custom-paginator {
   background: rgba(0, 0, 0, 0.2) !important;
   color: #666 !important;
@@ -183,7 +176,6 @@
   --mat-paginator-enabled-icon-color: #fff;
 }
 
-/* --- ANIMACIONES --- */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }

@@ -167,9 +167,9 @@
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   
-  color: #888; /* Color suave para no competir con el título */
+  color: #888;
   padding: 8px 18px;
-  border-radius: 100px; /* Forma de píldora perfecta */
+  border-radius: 100px;
   
   display: flex;
   align-items: center;
@@ -191,7 +191,6 @@
   transition: transform 0.3s ease;
 }
 
-/* Efecto Hover: se ilumina y la flecha se mueve */
 .back-pill:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);

@@ -37,8 +37,8 @@ export class ProductService {
   }
 
   getById(id: string): Observable<{ data: Product }> {
-  return this.http.get<{ data: Product }>(`${this.apiUrl}/get_product/${id}`);
-}
+    return this.http.get<{ data: Product }>(`${this.apiUrl}/get_product/${id}`);
+  }
 
   create(product: Partial<Product>): Observable<any> {
     return this.http.post(`${this.apiUrl}/create_product`, product).pipe(tap(() => this.getAll()));

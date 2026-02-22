@@ -41,7 +41,7 @@
 .input-glass input, .input-glass textarea {
   background: rgba(0, 0, 0, 0.3);
   border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 18px; /* Más redondeado */
+  border-radius: 18px;
   padding: 18px 22px;
   color: #fff;
   font-size: 1rem;
@@ -55,10 +55,9 @@
   transform: translateY(-2px);
 }
 
-/* Fila de Imagen y Stats: Ahora con más espacio */
 .visual-and-stats {
   display: grid;
-  grid-template-columns: 140px 1fr; /* Imagen un poco más grande */
+  grid-template-columns: 140px 1fr;
   gap: 30px;
   align-items: center;
   margin: 10px 0;
@@ -84,7 +83,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0; /* Esto oculta el texto nativo feo */
+  opacity: 0;
   cursor: pointer;
   z-index: 2;
 }
@@ -100,7 +99,6 @@
   gap: 20px;
 }
 
-/* Footer de Acciones */
 .bento-actions {
   display: flex;
   justify-content: space-between;
@@ -111,9 +109,9 @@
 }
 
 .btn-primary {
-  background: rgba(255, 255, 255, 0.05); /* Fondo muy sutil */
+  background: rgba(255, 255, 255, 0.05);
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde fino */
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 14px;
   padding: 12px 28px;
   font-weight: 600;

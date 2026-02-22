@@ -9,7 +9,7 @@ import { environment } from '../../../environment/environment.ts';
 })
 export class TransactionService {
   private http = inject(HttpClient);
-  private apiUrl = environment.transactionsUrl; 
+  private apiUrl = environment.transactionsUrl;
 
   private _transactions = signal<Transaction[]>([]);
   private _loading = signal<boolean>(false);
@@ -24,13 +24,15 @@ export class TransactionService {
 
   getAll(filter?: any): void {
     this._loading.set(true);
-    this.http.get<{ data: Transaction[] }>(`${this.apiUrl}/list_transactions`, { params: filter }).subscribe({
-      next: (response) => {
-        this._transactions.set(response.data);
-      },
-      error: () => this._loading.set(false),
-      complete: () => this._loading.set(false),
-    });
+    this.http
+      .get<{ data: Transaction[] }>(`${this.apiUrl}/list_transactions`, { params: filter })
+      .subscribe({
+        next: (response) => {
+          this._transactions.set(response.data);
+        },
+        error: () => this._loading.set(false),
+        complete: () => this._loading.set(false),
+      });
   }
 
   register(transaction: Partial<Transaction>): Observable<any> {
@@ -38,7 +40,7 @@ export class TransactionService {
     return this.http.post(`${this.apiUrl}/register_transaction`, transaction).pipe(
       tap(() => {
         this.getAll();
-      })
+      }),
     );
   }
 }

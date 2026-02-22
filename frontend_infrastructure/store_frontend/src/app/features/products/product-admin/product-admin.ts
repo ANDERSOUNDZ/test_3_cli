@@ -37,14 +37,14 @@ export class ProductAdmin implements OnInit {
   dataSource = new MatTableDataSource<Product>([]);
 
   constructor() {
-  effect(() => {
-    const products = this.productService.products();
-    this.dataSource.data = products;
-        if (this.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
-  });
-}
+    effect(() => {
+      const products = this.productService.products();
+      this.dataSource.data = products;
+      if (this.paginator) {
+        this.dataSource.paginator = this.paginator;
+      }
+    });
+  }
 
   ngOnInit() {
     this.productService.getAll();

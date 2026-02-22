@@ -2,18 +2,24 @@
   <div class="filter-header">
     <div class="search-glass">
       <mat-icon>search</mat-icon>
-      <input type="text" (input)="onSearch($event)" placeholder="Buscar en el inventario...">
+      <input type="text" (input)="onSearch($event)" placeholder="Buscar en el inventario..." />
     </div>
-    
+
     <div class="category-pills">
-      <button class="pill" [class.active]="selectedCategory() === 'all'" (click)="selectedCategory.set('all')">
+      <button
+        class="pill"
+        [class.active]="selectedCategory() === 'all'"
+        (click)="selectedCategory.set('all')"
+      >
         Todos
       </button>
       @for (cat of categories(); track cat) {
-        <button class="pill" 
-                [class.active]="selectedCategory() === cat" 
-                (click)="selectedCategory.set(cat)">
-          {{cat}}
+        <button
+          class="pill"
+          [class.active]="selectedCategory() === cat"
+          (click)="selectedCategory.set(cat)"
+        >
+          {{ cat }}
         </button>
       }
     </div>
@@ -22,7 +28,8 @@
   <div class="bento-grid">
     @for (item of filteredProducts(); track item.id) {
       <div class="bento-item" appearance="dynamic">
-        <app-product-card [product]="item"></app-product-card>
+        <app-product-card [product]="item" (onBuy)="openCheckoutFromList($event)">
+        </app-product-card>
       </div>
     }
   </div>

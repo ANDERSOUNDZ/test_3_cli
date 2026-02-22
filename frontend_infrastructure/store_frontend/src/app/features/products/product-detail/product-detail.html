@@ -10,35 +10,37 @@
     <div class="glass-bento-detail">
       <section class="bento-card image-hero">
         <div class="image-wrapper">
-          <img [src]="p.image" (error)="handleImageError($event)" class="detail-img">
-          <span class="badge-float">{{p.category}}</span>
+          <img [src]="p.image" (error)="handleImageError($event)" class="detail-img" />
+          <span class="badge-float">{{ p.category }}</span>
         </div>
       </section>
 
       <section class="bento-card info-hero">
         <div class="info-content">
-          <span class="category-tag">{{p.category}}</span>
-          <h1 class="title-gradient">{{p.name}}</h1>
-          
+          <span class="category-tag">{{ p.category }}</span>
+          <h1 class="title-gradient">{{ p.name }}</h1>
+
           <div class="product-id-box">
-            <small>REF: <code>{{p.id}}</code></small>
+            <small
+              >REF: <code>{{ p.id }}</code></small
+            >
           </div>
 
-          <p class="description">{{p.description}}</p>
-          
+          <p class="description">{{ p.description }}</p>
+
           <div class="detail-stats">
             <div class="stat-box">
               <small>Precio Unitario</small>
-              <strong>{{p.price | currency}}</strong>
+              <strong>{{ p.price | currency }}</strong>
             </div>
             <div class="stat-box" [class.low-border]="p.stock < 5">
               <small>Disponibilidad</small>
-              <strong [class.low]="p.stock < 5">{{p.stock}} unidades</strong>
+              <strong [class.low]="p.stock < 5">{{ p.stock }} unidades</strong>
             </div>
           </div>
 
           <div class="action-footer">
-            <button class="buy-now-btn">
+            <button class="buy-now-btn" (click)="openCheckout()">
               <span>Comprar</span>
               <mat-icon>shopping_bag</mat-icon>
             </button>

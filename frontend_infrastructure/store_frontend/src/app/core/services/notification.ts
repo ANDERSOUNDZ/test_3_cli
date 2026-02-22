@@ -4,13 +4,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class Notification {
-  private _snackBar = inject(MatSnackBar);  
-  message = signal<{text: string, type: 'success' | 'error'} | null>(null);
+  private _snackBar = inject(MatSnackBar);
+  message = signal<{ text: string; type: 'success' | 'error' } | null>(null);
   notify(text: string, isError: boolean = false) {
     this.message.set({ text, type: isError ? 'error' : 'success' });
     this._snackBar.open(text, 'X', {
       duration: 4000,
-      panelClass: isError ? ['error-snackbar'] : ['success-snackbar']
+      panelClass: isError ? ['error-snackbar'] : ['success-snackbar'],
     });
   }
 }

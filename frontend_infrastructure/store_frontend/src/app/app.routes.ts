@@ -4,6 +4,7 @@ import { ProductForm } from './features/products/product-form/product-form';
 import { ProductDetail } from './features/products/product-detail/product-detail';
 import { ProductAdmin } from './features/products/product-admin/product-admin';
 import { ProductEdit } from './features/products/product-edit/product-edit';
+import { HistoryTransaction } from './features/admin/history-transaction/history-transaction';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'products', pathMatch: 'full' },
@@ -12,4 +13,5 @@ export const routes: Routes = [
   { path: 'products/:id', component: ProductDetail },
   { path: 'admin', component: ProductAdmin },
   { path: 'admin/edit/:id', component: ProductEdit },
+  { path: 'transactions', component: HistoryTransaction },
 ];

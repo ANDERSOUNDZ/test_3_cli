@@ -4,7 +4,6 @@
   color: #ffffff;
 }
 
-/* Sidenav Estilo Dark */
 .sidenav {
   width: 280px;
   background: #0a0a0a !important;
@@ -12,7 +11,6 @@
   padding: 0 16px; /* Espacio para que las píldoras no toquen los bordes */
 }
 
-/* Logo con gradiente */
 .logo-section {
   padding: 40px 20px;
   display: flex;
@@ -32,7 +30,6 @@
   justify-content: center;
 }
 
-/* Navegación tipo Píldora (Bento Style) */
 .nav-pills {
   display: flex;
   flex-direction: column;
@@ -46,7 +43,7 @@
   padding: 14px 20px;
   text-decoration: none;
   color: #888;
-  border-radius: 100px; /* Estilo píldora */
+  border-radius: 100px;
   transition: all 0.3s ease;
   font-weight: 500;
 }
@@ -62,14 +59,12 @@
   color: #fff;
 }
 
-/* El estado activo que buscabas */
 .active-item {
   background: rgba(255, 255, 255, 0.1) !important;
   color: #fff !important;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Toolbar superior */
 .top-bar {
   background: rgba(5, 5, 5, 0.8) !important;
   backdrop-filter: blur(20px);
@@ -85,7 +80,7 @@
 }
 
 .content-wrapper {
-  padding: 0; 
+  padding: 0;
   background-color: transparent;
   height: calc(100vh - 80px);
   overflow-y: auto;

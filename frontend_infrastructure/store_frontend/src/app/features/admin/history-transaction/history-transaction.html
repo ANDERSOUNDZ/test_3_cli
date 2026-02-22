@@ -1,0 +1,87 @@
+<main class="admin-container">
+  <header class="admin-header">
+    <h2 class="title-gradient">Movimientos</h2>
+    <div class="header-actions">
+      <button class="action-btn" (click)="loadTransactions()">
+        <mat-icon>refresh</mat-icon> Sincronizar
+      </button>
+    </div>
+  </header>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <small>Operaciones Totales</small>
+      <div class="value">{{ transactionService.transactions().length }}</div>
+    </div>
+    <div class="stat-card">
+      <small>Última Actividad</small>
+      <div class="value" style="font-size: 1.1rem; color: #3b82f6">
+        {{ transactionService.transactions()[0]?.date | date: 'medium' }}
+      </div>
+    </div>
+  </div>
+
+  <div class="table-glass-container">
+    @if (transactionService.loading()) {
+      <div class="loading-overlay">
+        <mat-spinner diameter="40"></mat-spinner>
+      </div>
+    }
+
+    <table mat-table [dataSource]="transactionService.transactions()" class="custom-table">
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Registro</th>
+        <td mat-cell *matCellDef="let t">
+          <div class="date-cell">
+            <span class="main-date">{{ t.date | date: 'dd MMM, yyyy' }}</span>
+            <span class="sub-date">{{ t.date | date: 'HH:mm:ss' }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Naturaleza</th>
+        <td mat-cell *matCellDef="let t">
+          <span class="type-badge" [ngClass]="t.transactionType.toLowerCase()">
+            <mat-icon style="font-size: 16px; width: 16px; height: 16px">
+              {{ t.transactionType === 'Compra' ? 'add_circle' : 'remove_circle' }}
+            </mat-icon>
+            {{ t.transactionType }}
+          </span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="product">
+        <th mat-header-cell *matHeaderCellDef>Ítem Relacionado</th>
+        <td mat-cell *matCellDef="let t">
+          <div style="display: flex; flex-direction: column">
+            <strong style="color: #eee">{{ t.productName }}</strong>
+            <span class="db-id">REF: {{ t.productId.substring(0, 12) }}</span>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef>Volumen</th>
+        <td mat-cell *matCellDef="let t">
+          <span style="font-weight: 600">{{ t.quantity }}</span>
+          <span style="color: #555; font-size: 0.8rem; margin-left: 4px">unidades</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef>Monto Final</th>
+        <td mat-cell *matCellDef="let t" class="total-cell">
+          {{ t.totalPrice | currency }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['date', 'type', 'product', 'quantity', 'total']"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['date', 'type', 'product', 'quantity', 'total']"
+        class="table-row"
+      ></tr>
+    </table>
+  </div>
+</main>
