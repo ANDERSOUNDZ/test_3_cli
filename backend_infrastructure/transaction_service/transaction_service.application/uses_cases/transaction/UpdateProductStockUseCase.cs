@@ -1,4 +1,5 @@
 ﻿using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace transaction_service
 {
@@ -7,18 +8,27 @@ namespace transaction_service
         public async Task<(bool Success, string ProductName, string Message)> UpdateProductStockAsync(
             string productId, int quantity, string transactionType, CancellationToken cancellationToken)
         {
-            // Lógica para obtener el nombre y actualizar stock en el Product Service
-            var response = await _httpClient.GetAsync($"product_service/get_product/{productId}", cancellationToken);
+            var responseGet = await _httpClient.GetAsync($"product_service/get_product/{productId}", cancellationToken);
 
-            if (!response.IsSuccessStatusCode)
+            if (!responseGet.IsSuccessStatusCode)
                 return (false, string.Empty, "Producto no encontrado.");
 
-            var productData = await response.Content.ReadFromJsonAsync<dynamic>(cancellationToken);
-            string productName = productData?.data?.name ?? "Desconocido";
+            var productData = await responseGet.Content.ReadFromJsonAsync<JsonElement>(cancellationToken: cancellationToken);
 
-            // Lógica de actualización de stock (PUT)
+            string productName = "Desconocido";
+            if (productData.TryGetProperty("data", out var dataElement))
+            {
+                if (dataElement.TryGetProperty("name", out var nameElement))
+                {
+                    productName = nameElement.GetString() ?? "Desconocido";
+                }
+            }
             bool isIncrement = transactionType.ToLower() == "compra" || transactionType.ToLower() == "entrada";
-            var responseUpdate = await _httpClient.PutAsync($"product_service/update_stock/{productId}/{quantity}/{isIncrement}", null, cancellationToken);
+
+            var responseUpdate = await _httpClient.PutAsync(
+                $"product_service/update_stock/{productId}/{quantity}/{isIncrement}",
+                null,
+                cancellationToken);
 
             if (!responseUpdate.IsSuccessStatusCode)
                 return (false, string.Empty, "Error al actualizar stock.");
