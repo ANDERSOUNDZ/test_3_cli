@@ -41,4 +41,4 @@ echo "Compilando y ejecutando el servicio de productos"
 dotnet clean
 dotnet build
 echo "Servicio de transacciones levantado."
-dotnet watch run --urls http://0.0.0.0:8081 --non-interactive
+dotnet watch run --urls http://0.0.0.0:8080 --non-interactive

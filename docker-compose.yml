@@ -53,6 +53,8 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db-transactions;Database=db_transactions;User Id=sa;Password=Transactions123*;TrustServerCertificate=True
+      - DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM=1
+      - DOTNET_WATCH_RESTART_ON_RUDE_EDIT=1
     ports:
       - "8082:8080"
     volumes:
