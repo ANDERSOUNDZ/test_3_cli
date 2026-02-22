@@ -1,8 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
-html, body {
-  height: 100%;
-  margin: 0;
-  background-color: #050505; /* Fondo base para toda la app */
-  font-family: 'Inter', sans-serif;
-  color: white;
+:root {
+    --dark-color: #5c6378ff;
+    --light-color: #edf2f4ff;
+    --background-color: #2b2d42ff;
+    --secondary-color: #757e93ff;
+    --important-color: #ef233cff;
+    --fire-engine-red: #d90429ff;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: clamp(14px, 1.5vw, 18px);
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--light-color);
+    margin: 0;
 }

@@ -1,6 +1,6 @@
 .main-container {
   height: 100vh;
-  background-color: #050505;
+  background: radial-gradient(circle at top right, #1a1a1a, #050505);
   color: #ffffff;
 }
 
@@ -85,6 +85,8 @@
 }
 
 .content-wrapper {
-  padding: 30px;
-  background-color: #050505;
+  padding: 0; 
+  background-color: transparent;
+  height: calc(100vh - 80px);
+  overflow-y: auto;
 }

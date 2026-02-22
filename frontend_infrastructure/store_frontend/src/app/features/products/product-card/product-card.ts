@@ -12,11 +12,10 @@ import { Product } from '../../../core/models/product';
   imports: [
     CommonModule,
     RouterLink,
-    MatCardModule,
-    MatButtonModule,
     MatIconModule,
-    MatChipsModule,
-    CurrencyPipe
+    MatButtonModule,
+    CurrencyPipe,
+    RouterLink
   ],
   templateUrl: './product-card.html',
   styleUrl: './product-card.css',
@@ -24,6 +23,13 @@ import { Product } from '../../../core/models/product';
 export class ProductCard {
   product = input.required<Product>();
   onBuy = output<Product>();
+
+  handleImageError(event: Event) {
+  const element = event.target as HTMLImageElement;
+  element.onerror = null; 
+  element.src = 'img/placeholder-product.png'; 
+}
+
   handleBuy() {
     this.onBuy.emit(this.product());
   }

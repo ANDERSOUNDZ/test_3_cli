@@ -1,0 +1,76 @@
+<main class="edit-container">
+  <header class="edit-header">
+    <div class="header-info">
+      <button class="back-pill" routerLink="/admin">
+        <mat-icon>arrow_back</mat-icon>
+        Volver
+      </button>
+      <h2 class="title-gradient">Editar producto</h2>
+    </div>
+  </header>
+
+  <div class="bento-grid-edit">
+    <section class="bento-card form-zone">
+      <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label>Nombre del Producto</label>
+          <input formControlName="name" type="text" placeholder="Ej. Taladro Percutor">
+        </div>
+
+        <div class="input-group">
+          <label>Descripción</label>
+          <textarea formControlName="description" rows="4" placeholder="Detalles técnicos..."></textarea>
+        </div>
+
+        <div class="row">
+          <div class="input-group">
+            <label>Categoría</label>
+            <input formControlName="category" type="text" placeholder="Construcción">
+          </div>
+          <div class="input-group">
+            <label>Imagen del Producto</label>
+            <div class="upload-wrapper">
+              <div class="btn-upload-styled">
+                <mat-icon>image</mat-icon>
+                <span>Cambiar Foto</span>
+              </div>
+              <input type="file" (change)="onFileSelected($event)" accept="image/*" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-group">
+            <label>Precio ($)</label>
+            <input formControlName="price" type="number" step="0.01">
+          </div>
+          <div class="input-group">
+            <label>Stock Actual</label>
+            <input formControlName="stock" type="number">
+          </div>
+        </div>
+
+        <button type="submit" class="save-btn" [disabled]="editForm.invalid">
+          GUARDAR CAMBIOS
+          <mat-icon>check_circle</mat-icon>
+        </button>
+      </form>
+    </section>
+
+    <section class="bento-card preview-zone">
+      <small class="preview-label">LIVE PREVIEW</small>
+      
+      <div class="live-preview-card">
+        <img [src]="imagePreview()" class="preview-img">
+        <div class="preview-info">
+          <span class="preview-cat">{{editForm.get('category')?.value || 'Categoría'}}</span>
+          <h3>{{editForm.get('name')?.value || 'Nombre del Producto'}}</h3>
+          <p class="preview-price">{{editForm.get('price')?.value | currency}}</p>
+          <div class="preview-stock">
+            En inventario: {{editForm.get('stock')?.value}} unidades
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>

@@ -1,17 +1,19 @@
-/* src/app/features/products/product-list/product-list.css */
 .creative-content {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
-  padding: 40px 20px;
+  padding: 40px 24px;
 }
 
 .search-glass {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid #222;
-  border-radius: 18px;
-  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 16px 24px;
+  margin-bottom: 50px;
   display: flex; align-items: center; gap: 12px;
   margin-bottom: 40px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .search-glass input {
@@ -25,4 +27,53 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 24px;
+  align-items: stretch; 
+}
+
+.category-pills {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #888;
+  padding: 8px 20px;
+  border-radius: 100px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+}
+
+.pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.pill.active {
+  background: #fff;
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.bento-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  animation: fadeIn 0.5s ease backwards;
+}
+
+app-product-card {
+  display: block;
+  height: 100%;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }

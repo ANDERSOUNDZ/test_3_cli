@@ -1,0 +1,153 @@
+.creative-content {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.single-bento-container {
+  width: 100%;
+  max-width: 850px; 
+}
+
+.bento-card.cohesive-grid {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 32px;
+  padding: 45px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+}
+
+.input-glass {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-glass label {
+  font-size: 0.7rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-left: 5px;
+}
+
+.input-glass input, .input-glass textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 18px; /* Más redondeado */
+  padding: 18px 22px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.input-glass input:focus, .input-glass textarea:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.03);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+/* Fila de Imagen y Stats: Ahora con más espacio */
+.visual-and-stats {
+  display: grid;
+  grid-template-columns: 140px 1fr; /* Imagen un poco más grande */
+  gap: 30px;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.file-upload-mini {
+  height: 140px;
+  width: 140px;
+  background: rgba(255,255,255,0.02);
+  border: 2px dashed rgba(255,255,255,0.1);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.file-upload-mini input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* Esto oculta el texto nativo feo */
+  cursor: pointer;
+  z-index: 2;
+}
+
+.file-upload-mini:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.stats-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Footer de Acciones */
+.bento-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.btn-primary {
+  background: rgba(255, 255, 255, 0.05); /* Fondo muy sutil */
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Borde fino */
+  border-radius: 14px;
+  padding: 12px 28px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(5px);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #666;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.btn-primary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  filter: grayscale(1);
+}
+
+.btn-ghost:hover {
+  color: #aaa;
+}

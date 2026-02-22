@@ -1,27 +1,32 @@
 <div class="bento-card">
   <div class="image-wrapper">
-    <img [src]="product().image" alt="Producto">
-    <span class="badge">{{product().category}}</span>
+    <img
+      [src]="product().image"
+      (error)="handleImageError($event)"
+      alt="Producto"
+      class="product-img"
+    />
+    <span class="badge">{{ product().category }}</span>
   </div>
-  
+
   <div class="info-wrapper">
-    <h3>{{product().name}}</h3>
-    <p class="desc">{{product().description}}</p>
-    
+    <h3>{{ product().name }}</h3>
+    <p class="desc">{{ product().description }}</p>
+
     <div class="stats">
       <div class="stat-item">
         <small>PRECIO</small>
-        <strong>{{product().price | currency}}</strong>
+        <strong>{{ product().price | currency }}</strong>
       </div>
       <div class="stat-item">
         <small>STOCK</small>
-        <strong [class.low]="product().stock < 5">{{product().stock}} ud.</strong>
+        <strong [class.low]="product().stock < 5">{{ product().stock }} ud.</strong>
       </div>
     </div>
 
-    <button class="action-btn" routerLink="/transactions/new">
-      Registrar
-      <mat-icon>arrow_forward</mat-icon>
+    <button class="action-btn" [routerLink]="['/products', product().id]">
+      Ver producto
+      <mat-icon>visibility</mat-icon>
     </button>
   </div>
 </div>
