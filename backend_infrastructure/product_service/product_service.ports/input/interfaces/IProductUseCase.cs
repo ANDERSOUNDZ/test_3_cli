@@ -1,5 +1,5 @@
-﻿using product_service.ports.dtos.request;
-using product_service.ports.dtos.response;
+﻿using product_service.ports.dtos.request.product;
+using product_service.ports.dtos.response.product;
 
 namespace product_service
 {

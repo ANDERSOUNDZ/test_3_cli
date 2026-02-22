@@ -6,10 +6,16 @@ namespace product_service.ports.shared.dictionaries
     {
         private static readonly Dictionary<ApiMessage, string> Messages = new()
         {
-            [ApiMessage.RegisterSuccess] = "Producto registrado correctamente.",
+            [ApiMessage.ProductSuccess] = "Producto registrado correctamente.",
+            [ApiMessage.CategorySuccess] = "Categoria registrada correctamente.",
             [ApiMessage.BadRequest] = "Solicitud inválida o cuerpo vacío.",
+            [ApiMessage.BadRequestProduct] = "El producto no existe.",
+            [ApiMessage.BadRequestProductUpdate] = "No se pudo actualizar. Producto no encontrado.",
+            [ApiMessage.BadRequestDeleteProduct] = "No se pudo eliminar. Producto no encontrado.",
             [ApiMessage.ValidationError] = "Error de validación.",
             [ApiMessage.InternalServerError] = "Error interno del servidor.",
+            [ApiMessage.BadRequestCategory] = "No se encontró la categoría solicitada.",
+            
         };
         public static string GetMessage(this ApiMessage message)
             => Messages.TryGetValue(message, out var msg) ? msg : "Mensaje no definido.";

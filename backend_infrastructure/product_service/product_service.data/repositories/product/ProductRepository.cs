@@ -6,22 +6,22 @@ namespace product_service
 {
     public partial class ProductRepository : IProductRepository
     {
-        public async Task<IEnumerable<ProductEntity>> GetAllAsync(string? category, string? name, CancellationToken cancellationToken)
+        public async Task<IEnumerable<ProductEntity>> GetAllAsync(int? categoryId, string? name, CancellationToken cancellationToken)
         {
             var query = _context.Products.AsNoTracking().AsQueryable();
 
-            if (!string.IsNullOrEmpty(category))
-                query = query.Where(p => p.Category == category);
+            if (categoryId.HasValue && categoryId > 0)
+                query = query.Where(product => product.CategoryId == categoryId.Value);
 
             if (!string.IsNullOrEmpty(name))
-                query = query.Where(p => p.Name.Contains(name));
+                query = query.Where(product => product.Name.Contains(name));
 
             return await query.ToListAsync(cancellationToken);
         }
 
         public async Task<ProductEntity?> GetByIdAsync(string id, CancellationToken cancellationToken)
         {
-            return await _context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+            return await _context.Products.FirstOrDefaultAsync(product => product.Id == id, cancellationToken);
         }
 
         public async Task AddAsync(ProductEntity product, CancellationToken cancellationToken)

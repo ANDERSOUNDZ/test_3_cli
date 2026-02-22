@@ -1,4 +1,4 @@
-﻿using product_service.ports.dtos.request;
+﻿using product_service.ports.dtos.request.product;
 
 namespace product_service
 {
@@ -9,11 +9,13 @@ namespace product_service
             var entity = await _productRepository.GetByIdAsync(id, cancellationToken);
 
             if (entity == null) return false;
+
             entity.Name = request.Name;
             entity.Description = request.Description;
-            entity.Category = request.Category;
+            entity.CategoryId = request.CategoryId;
             entity.Image = request.Image;
             entity.Price = request.Price;
+
             if (request.Stock < entity.Stock)
             {
                 int diferencia = entity.Stock - request.Stock;
@@ -23,6 +25,7 @@ namespace product_service
             {
                 entity.Stock = request.Stock;
             }
+
             await _productRepository.UpdateAsync(entity, cancellationToken);
             return true;
         }

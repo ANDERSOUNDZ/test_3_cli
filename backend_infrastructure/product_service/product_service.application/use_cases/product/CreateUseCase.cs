@@ -1,5 +1,5 @@
 ﻿using product_service.domain.entities;
-using product_service.ports.dtos.request;
+using product_service.ports.dtos.request.product;
 
 namespace product_service
 {
@@ -12,7 +12,7 @@ namespace product_service
                 Id = Guid.NewGuid().ToString("N"),
                 Name = request.Name,
                 Description = request.Description,
-                Category = request.Category,
+                CategoryId = request.CategoryId,
                 Image = request.Image,
                 Price = request.Price,
                 Stock = request.Stock

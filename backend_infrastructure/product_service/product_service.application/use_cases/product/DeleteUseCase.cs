@@ -1,4 +1,4 @@
-﻿using product_service.ports.dtos.request;
+﻿using product_service.ports.dtos.request.product;
 
 namespace product_service
 {

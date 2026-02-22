@@ -9,16 +9,18 @@ namespace product_service.data.configurations
         public void Configure(EntityTypeBuilder<ProductEntity> builder)
         {
             builder.ToTable("tb_product");
-            builder.HasKey(p => p.Id);
-            builder.Property(p => p.Id)
-                   .HasMaxLength(32)
-                   .IsRequired();
-            builder.Property(p => p.Name).IsRequired().HasMaxLength(200);
-            builder.Property(p => p.Description).HasMaxLength(1000);
-            builder.Property(p => p.Category).HasMaxLength(100);
-            builder.Property(p => p.Image).HasMaxLength(500);
-            builder.Property(p => p.Price).HasColumnType("decimal(18,2)").IsRequired();
-            builder.Property(p => p.Stock).IsRequired();
+            builder.HasKey(product => product.Id);
+            builder.Property(product => product.Id).HasMaxLength(36).IsRequired();
+            builder.Property(product => product.Name).IsRequired().HasMaxLength(200);
+            builder.Property(product => product.Description).HasMaxLength(1000);
+            builder.Property(product => product.Image).HasMaxLength(500);
+            builder.Property(product => product.Price).HasColumnType("decimal(18,2)").IsRequired();
+            builder.Property(product => product.Stock) .IsRequired();
+            builder.Property(product => product.CategoryId).IsRequired();
+            builder.HasOne(product => product.Category)
+                .WithMany(category => category.Products)
+                .HasForeignKey(product => product.CategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

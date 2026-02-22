@@ -8,6 +8,7 @@ namespace product_service.data.context
         public ProductDbContext(DbContextOptions<ProductDbContext> options) : base(options) { }
 
         public DbSet<ProductEntity> Products => Set<ProductEntity>();
+        public DbSet<CategoryEntity> Categories => Set<CategoryEntity>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

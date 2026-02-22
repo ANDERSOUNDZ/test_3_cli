@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using product_service.adapters.input.filters;
-using product_service.ports.dtos.request;
+using product_service.ports.dtos.request.product;
 using product_service.ports.shared.enums;
 
 namespace product_service.adapters.input.controllers.product
@@ -21,7 +21,7 @@ namespace product_service.adapters.input.controllers.product
         CancellationToken cancellationToken = default)
         {
             var result = await _executor.ExecuteAsync(request, cancellationToken);
-            return OkResponse(result, ApiMessage.RegisterSuccess);
+            return OkResponse(result, ApiMessage.ProductSuccess);
         }
         [HttpGet("list_products")]
         public async Task<IActionResult> GetAll(
@@ -40,7 +40,7 @@ namespace product_service.adapters.input.controllers.product
             var result = await _executor.ExecuteAsync(new GetProductRequest(id), cancellationToken);
 
             if (result == null)
-                return BadRequestResponse(ApiMessage.BadRequest, "El producto no existe.");
+                return BadRequestResponse(ApiMessage.BadRequestProduct);
 
             return OkResponse(result);
         }
@@ -53,7 +53,7 @@ namespace product_service.adapters.input.controllers.product
             {
                 var result = await _executor.ExecuteAsync(id, request, cancellationToken);
                 if (!result)
-                    return BadRequestResponse(ApiMessage.BadRequest, "No se pudo actualizar. Producto no encontrado.");
+                    return BadRequestResponse(ApiMessage.BadRequestProductUpdate);
                 return OkResponse(true, ApiMessage.OperationSuccess);
             }
             catch (InvalidOperationException ex)
@@ -84,7 +84,7 @@ namespace product_service.adapters.input.controllers.product
             var result = await _executor.ExecuteAsync(new DeleteProductRequest(id), cancellationToken);
 
             if (!result)
-                return BadRequestResponse(ApiMessage.BadRequest, "No se pudo eliminar. Producto no encontrado.");
+                return BadRequestResponse(ApiMessage.BadRequestDeleteProduct);
 
             return OkResponse(true, ApiMessage.OperationSuccess);
         }

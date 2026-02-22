@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using product_service.ports.dtos.request;
+using product_service.ports.dtos.request.product;
 
 namespace product_service.adapters.input.validators.product
 {
@@ -14,9 +14,7 @@ namespace product_service.adapters.input.validators.product
                 .GreaterThan(0).WithMessage("El precio debe ser un valor mayor a cero.");
             RuleFor(x => x.Stock)
                 .GreaterThanOrEqualTo(0).WithMessage("El stock no puede ser un número negativo.");
-            RuleFor(x => x.Category)
-                .NotEmpty().WithMessage("La categoría es obligatoria.")
-                .MaximumLength(50).WithMessage("La categoría no debe exceder los 50 caracteres.");
+            RuleFor(x => x.CategoryId).NotNull().WithMessage("La categoría es obligatoria.");
             RuleFor(x => x.Image)
                 .MaximumLength(500).WithMessage("La URL de la imagen es demasiado larga.");
         }

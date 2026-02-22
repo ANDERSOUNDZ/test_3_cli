@@ -1,5 +1,5 @@
-﻿using product_service.ports.dtos.request;
-using product_service.ports.dtos.response;
+﻿using product_service.ports.dtos.request.product;
+using product_service.ports.dtos.response.product;
 
 namespace product_service
 {
@@ -10,7 +10,7 @@ namespace product_service
             int pageSize = request.PageSize > 15 ? 15 : (request.PageSize <= 0 ? 15 : request.PageSize);
             int skip = (request.Page - 1) * pageSize;
 
-            var products = await _productRepository.GetAllAsync(request.Category, request.Name, cancellationToken);
+            var products = await _productRepository.GetAllAsync(request.CategoryId, request.Name, cancellationToken);
 
             return products
                 .Skip(skip)
@@ -20,7 +20,7 @@ namespace product_service
                     Id = product.Id,
                     Name = product.Name,
                     Description = product.Description,
-                    Category = product.Category,
+                    CategoryId = product.CategoryId,
                     Image = product.Image,
                     Price = product.Price,
                     Stock = product.Stock
