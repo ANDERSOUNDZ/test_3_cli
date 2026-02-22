@@ -21,16 +21,38 @@ namespace product_service.data.migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("product_service.domain.entities.ProductEntity", b =>
+            modelBuilder.Entity("product_service.domain.entities.CategoryEntity", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasMaxLength(32)
-                        .HasColumnType("nvarchar(32)");
+                        .HasColumnType("int");
 
-                    b.Property<string>("Category")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("tb_category", (string)null);
+                });
+
+            modelBuilder.Entity("product_service.domain.entities.ProductEntity", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("nvarchar(36)");
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -55,7 +77,25 @@ namespace product_service.data.migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("tb_product", (string)null);
+                });
+
+            modelBuilder.Entity("product_service.domain.entities.ProductEntity", b =>
+                {
+                    b.HasOne("product_service.domain.entities.CategoryEntity", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("product_service.domain.entities.CategoryEntity", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

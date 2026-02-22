@@ -1,16 +1,16 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using product_service.adapters.input.filters;
 using product_service.ports.dtos.request.category;
-using product_service.ports.dtos.response.category;
 using product_service.ports.shared.enums;
 
 namespace product_service.adapters.input.controllers.category
 {
-    public class ProductController : BaseController
+    [Route("/")]
+    [ApiController]
+    public class CategoryController : BaseController
     {
         private readonly IProductUseCase _executor;
-        public ProductController(IProductUseCase executor)
+        public CategoryController(IProductUseCase executor)
         {
             _executor = executor;
         }

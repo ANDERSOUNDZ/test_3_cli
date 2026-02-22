@@ -5,7 +5,7 @@ using product_service.ports.shared.enums;
 
 namespace product_service.adapters.input.controllers.product
 {
-    [Route("product_service/")]
+    [Route("/")]
     [ApiController]
     public class ProductController : BaseController
     {
