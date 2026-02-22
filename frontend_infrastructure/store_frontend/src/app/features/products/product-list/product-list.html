@@ -1,0 +1,16 @@
+<div class="creative-content">
+  <div class="filter-header">
+    <div class="search-glass">
+      <mat-icon>search</mat-icon>
+      <input type="text" (input)="onSearch($event)" placeholder="Buscar en el inventario...">
+    </div>
+  </div>
+
+  <div class="bento-grid">
+    @for (item of filteredProducts(); track item.id) {
+      <div class="bento-item">
+        <app-product-card [product]="item"></app-product-card>
+      </div>
+    }
+  </div>
+</div>

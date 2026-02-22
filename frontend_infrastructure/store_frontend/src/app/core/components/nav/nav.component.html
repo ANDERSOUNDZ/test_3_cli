@@ -1,0 +1,40 @@
+<mat-sidenav-container class="main-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    
+    <div class="logo-section">
+      <div class="logo-icon">
+        <mat-icon>handyman</mat-icon>
+      </div>
+      <span>FerrePro</span>
+    </div>
+
+    <nav class="nav-pills">
+      <a class="nav-item" routerLink="/products" routerLinkActive="active-item">
+        <mat-icon>grid_view</mat-icon>
+        <span>Explorar</span>
+      </a>
+      <a class="nav-item" routerLink="/transactions" routerLinkActive="active-item">
+        <mat-icon>swap_vert</mat-icon>
+        <span>Movimientos</span>
+      </a>
+    </nav>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar class="top-bar">
+      @if (isHandset$ | async) {
+        <button mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu_open</mat-icon>
+        </button>
+      }
+      <span class="view-title">Tienda Digital</span>
+    </mat-toolbar>
+
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

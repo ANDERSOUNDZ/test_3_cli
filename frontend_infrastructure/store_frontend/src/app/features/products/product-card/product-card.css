@@ -1,0 +1,66 @@
+/* src/app/features/products/product-card/product-card.css */
+.bento-card {
+  background: #0f0f0f; /* Fondo oscuro */
+  border: 1px solid #1a1a1a; /* Borde sutil */
+  border-radius: 28px;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  overflow: hidden;
+  height: 100%;
+}
+
+.bento-card:hover {
+  transform: translateY(-8px);
+  border-color: #333;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+.image-wrapper {
+  position: relative;
+  height: 200px;
+  background: #151515;
+}
+
+.image-wrapper img {
+  width: 100%; height: 100%; object-fit: cover;
+  opacity: 0.8; /* Menos brillo para el dark mode */
+}
+
+.badge {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  padding: 6px 14px; border-radius: 100px;
+  font-size: 0.7rem; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.info-wrapper { padding: 24px; }
+
+h3 { margin: 0; font-size: 1.25rem; font-weight: 600; color: #eee; }
+
+.desc { color: #888; font-size: 0.9rem; margin: 10px 0 20px; line-height: 1.5; }
+
+.stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 20px;
+}
+
+.stat-item {
+  background: #161616; padding: 12px; border-radius: 16px;
+  border: 1px solid #222;
+}
+
+.stat-item small { display: block; font-size: 0.65rem; color: #555; margin-bottom: 4px; }
+.stat-item strong { font-size: 1.1rem; color: #fff; }
+.low { color: #ff4444 !important; }
+
+.action-btn {
+  width: 100%; padding: 14px; border: none;
+  background: #ffffff; color: #000; /* Botón blanco resalta en dark mode */
+  border-radius: 16px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  cursor: pointer; transition: 0.2s;
+}
+
+.action-btn:hover { background: #e0e0e0; transform: scale(0.98); }

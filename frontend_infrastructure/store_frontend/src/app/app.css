@@ -1,0 +1,6 @@
+/* src/app/app.css */
+:host {
+  display: block;
+  height: 100vh;
+  background-color: #050505;
+}
