@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="uses_cases\transaction\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\transaction_service.ports\transaction_service.ports.csproj" />
   </ItemGroup>
 

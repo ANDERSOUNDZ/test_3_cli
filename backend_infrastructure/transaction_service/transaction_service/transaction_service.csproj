@@ -23,10 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="adapters\input\validators\transaction\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\transaction_service.application\transaction_service.application.csproj" />
     <ProjectReference Include="..\transaction_service.data\transaction_service.data.csproj" />
   </ItemGroup>

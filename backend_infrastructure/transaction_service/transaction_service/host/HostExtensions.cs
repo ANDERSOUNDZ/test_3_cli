@@ -13,7 +13,7 @@ namespace transaction_service.host
             services.AddSwaggerDocumentation();
             services.AddRepositories();
             services.AddUseCases();
-            //services.AddValidators();
+            services.AddValidators();
             services.AddControllers();
 
             return builder;

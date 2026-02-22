@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\transaction_service.domain\transaction_service.domain.csproj" />
+  </ItemGroup>
+
 </Project>

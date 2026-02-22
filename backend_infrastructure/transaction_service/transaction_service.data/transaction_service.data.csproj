@@ -15,11 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="migrations\" />
-    <Folder Include="configurations\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\transaction_service.domain\transaction_service.domain.csproj" />
     <ProjectReference Include="..\transaction_service.ports\transaction_service.ports.csproj" />
   </ItemGroup>
 
