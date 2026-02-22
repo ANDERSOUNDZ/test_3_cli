@@ -26,22 +26,30 @@ import { Product } from '../../../core/models/product';
 export class ProductList implements OnInit {
   productService = inject(ProductService);
   searchQuery = signal('');
-  selectedCategory = signal('all');
+
+  // SOLUCIÓN 1: Permitir que el signal sea string O number
+  selectedCategory = signal<string | number>('all');
+
   private dialog = inject(MatDialog);
+
   categories = computed(() => {
-    const allCats = this.productService.products().map((p) => p.category);
+    const allCats = this.productService.products().map((p) => p.categoryId);
     return [...new Set(allCats)];
   });
 
   filteredProducts = computed(() => {
     let list = this.productService.products();
-    const query = this.searchQuery().toLowerCase();
     const cat = this.selectedCategory();
 
+    // SOLUCIÓN 2: Recuperar el valor del search query
+    const query = this.searchQuery().toLowerCase();
+
+    // Filtrado por categoría
     if (cat !== 'all') {
-      list = list.filter((p) => p.category === cat);
+      list = list.filter((p) => p.categoryId === cat);
     }
 
+    // Filtrado por búsqueda
     if (query) {
       list = list.filter((p) => p.name.toLowerCase().includes(query));
     }
@@ -54,7 +62,8 @@ export class ProductList implements OnInit {
   }
 
   onSearch(event: Event) {
-    this.searchQuery.set((event.target as HTMLInputElement).value);
+    const value = (event.target as HTMLInputElement).value;
+    this.searchQuery.set(value);
   }
 
   openCheckoutFromList(product: Product) {

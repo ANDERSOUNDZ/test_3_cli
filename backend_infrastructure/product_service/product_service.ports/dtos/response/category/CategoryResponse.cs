@@ -1,4 +1,4 @@
 ﻿namespace product_service.ports.dtos.response.category
 {
-    public record CategoryResponse(string Name, string Description);
+    public record CategoryResponse(int Id, string Name, string Description);
 }

@@ -11,13 +11,13 @@
       <section class="bento-card image-hero">
         <div class="image-wrapper">
           <img [src]="p.image" (error)="handleImageError($event)" class="detail-img" />
-          <span class="badge-float">{{ p.category }}</span>
+          <span class="badge-float">{{ p.categoryId }}</span>
         </div>
       </section>
 
       <section class="bento-card info-hero">
         <div class="info-content">
-          <span class="category-tag">{{ p.category }}</span>
+          <span class="category-tag">{{ p.categoryId }}</span>
           <h1 class="title-gradient">{{ p.name }}</h1>
 
           <div class="product-id-box">

@@ -12,7 +12,7 @@ namespace product_service
             {
                 throw new Exception("Category not found");
             }
-            return new CategoryResponse(category.Name, category.Description);
+            return new CategoryResponse(category.Id, category.Name, category.Description);
         }
     }
 }

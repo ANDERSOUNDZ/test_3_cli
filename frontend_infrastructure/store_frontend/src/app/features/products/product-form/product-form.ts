@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { Product } from '../../../core/models/product';
+import { CategoryService } from '../../../core/services/category-service';
 
 @Component({
   selector: 'app-product-form',
@@ -16,46 +17,61 @@ import { Product } from '../../../core/models/product';
 export class ProductForm implements OnInit {
   private fb = inject(FormBuilder);
   private productService = inject(ProductService);
+  private categoryService = inject(CategoryService);
   private notification = inject(Notification);
   private router = inject(Router);
+
   imagePreview: string | null = null;
   selectedFileName: string = '';
   productForm!: FormGroup;
+  categories = this.categoryService.categories;
+  isLoading = this.categoryService.loading;
 
   ngOnInit() {
+    console.log("Holaaaa");
+    
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.required]],
-      category: ['', [Validators.required, Validators.maxLength(50)]],
+      categoryId: [null, [Validators.required]],
       image: ['', [Validators.maxLength(500)]],
-      price: [0, [Validators.required, Validators.min(0.01)]],
-      stock: [0, [Validators.required, Validators.min(0)]],
-    });
+      price: [0.01, [Validators.required, Validators.min(0.01)]],
+      stock: [1, [Validators.required, Validators.min(0)]],
+    });    
+    this.categoryService.getAll();
   }
 
   onSubmit() {
     if (this.productForm.valid) {
+      const rawValue = this.productForm.value;
+
       const productData: Partial<Product> = {
-        name: this.productForm.value.name,
-        description: this.productForm.value.description,
-        category: this.productForm.value.category,
-        price: this.productForm.value.price,
-        stock: this.productForm.value.stock,
-        image: 'img/' + this.productForm.value.image,
+        name: rawValue.name,
+        description: rawValue.description,
+        categoryId: Number(rawValue.categoryId), // Aseguramos que sea número
+        price: rawValue.price,
+        stock: rawValue.stock,
+        image: 'img/' + (rawValue.image || 'default.png'),
       };
+
+      console.log('Enviando producto al servidor:', productData);
 
       this.productService.create(productData).subscribe({
         next: () => {
-          this.notification.notify('¡Producto registrado! Mueve la imagen a /public/img/');
+          this.notification.notify('¡Producto registrado con éxito!');
           this.router.navigate(['/products']);
         },
         error: (err) => {
-          if (err.messages && err.messages.length > 0) {
-            this.notification.notify(err.messages[0], true);
+          console.error('Error del servidor:', err);
+          this.notification.notify('Error al guardar: Verifica que la categoría sea válida.', true);
+          
+          if (err.originalError?.error?.errors) {
             this.markServerErrors(err.originalError.error.errors);
           }
         },
       });
+    } else {
+      this.notification.notify('Por favor, completa el formulario correctamente.', true);
     }
   }
 

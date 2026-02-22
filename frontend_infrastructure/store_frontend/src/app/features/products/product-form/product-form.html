@@ -1,64 +1,76 @@
-<main class="creative-content">
-  <header class="form-header">
-    <h2 class="title-gradient">Nuevo Producto</h2>
-  </header>
-
-  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="single-bento-container">
-    <article class="bento-card cohesive-grid">
-      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px">
-        <div class="input-glass">
-          <label>Nombre del Producto</label>
-          <input formControlName="name" placeholder="Ej. Sierra Eléctrica Industrial" />
-        </div>
-        <div class="input-glass">
-          <label>Categoría</label>
-          <input formControlName="category" placeholder="Corte" />
-        </div>
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()" class="single-bento-container">
+  <article class="bento-card cohesive-grid">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px">
+      <div class="input-glass">
+        <label>Nombre del Producto</label>
+        <input formControlName="name" placeholder="Ej. Sierra Eléctrica" />
+        @if (productForm.get('name')?.invalid && productForm.get('name')?.touched) {
+          <span class="error-text">Nombre requerido (máx 100 caracteres)</span>
+        }
       </div>
 
       <div class="input-glass">
-        <label>Descripción</label>
-        <textarea
-          formControlName="description"
-          rows="4"
-          placeholder="Especificaciones técnicas y detalles..."
-        ></textarea>
+        <label>Categoría</label>
+        @if (isLoading()) {
+          <div class="spinner">Cargando...</div>
+        } @else {
+          <select formControlName="categoryId">
+            <option [ngValue]="null" disabled>Seleccionar...</option>
+            @for (item of categories(); track item.id) {
+              <option [ngValue]="item.id">{{ item.name }}</option>
+            }
+          </select>
+        }
+        @if (productForm.get('categoryId')?.invalid && productForm.get('categoryId')?.touched) {
+          <span class="error-text">Selecciona una categoría</span>
+        }
+      </div>
+    </div>
+
+    <div class="input-glass">
+      <label>Descripción</label>
+      <textarea formControlName="description" rows="4"></textarea>
+      @if (productForm.get('description')?.invalid && productForm.get('description')?.touched) {
+        <span class="error-text">La descripción es obligatoria</span>
+      }
+    </div>
+
+    <div class="visual-and-stats">
+      <div class="file-upload-mini">
+        <img
+          *ngIf="imagePreview"
+          [src]="imagePreview"
+          style="width: 100%; height: 100%; object-fit: cover"
+        />
+        <mat-icon *ngIf="!imagePreview">add_a_photo</mat-icon>
+        <input type="file" (change)="onFileSelected($event)" />
       </div>
 
-      <div class="visual-and-stats">
-        <div class="file-upload-mini">
-          @if (imagePreview) {
-            <img [src]="imagePreview" style="width: 100%; height: 100%; object-fit: cover" />
-          } @else {
-            <mat-icon style="font-size: 32px; color: rgba(255, 255, 255, 0.2)"
-              >add_a_photo</mat-icon
-            >
+      <div class="stats-inputs">
+        <div class="input-glass">
+          <label>Precio</label>
+          <input type="number" formControlName="price" />
+          @if (productForm.get('price')?.invalid && productForm.get('price')?.touched) {
+            <span class="error-text">Mínimo 0.01</span>
           }
-          <input type="file" (change)="onFileSelected($event)" accept=".jpg,.jpeg,.png" />
         </div>
-
-        <div class="stats-inputs">
-          <div class="input-glass">
-            <label>Precio ($)</label>
-            <input type="number" formControlName="price" placeholder="0.00" />
-          </div>
-          <div class="input-glass">
-            <label>Stock (uds)</label>
-            <input type="number" formControlName="stock" placeholder="0" />
-          </div>
+        <div class="input-glass">
+          <label>Stock</label>
+          <input type="number" formControlName="stock" />
         </div>
       </div>
-
-      <footer class="bento-actions">
-        <button type="button" class="btn-ghost" (click)="productForm.reset()">
-          Limpiar campos
-        </button>
-
-        <button type="submit" class="btn-primary" [disabled]="productForm.invalid">
-          <span>REGISTRAR PRODUCTO</span>
-          <mat-icon style="font-size: 18px; width: 18px; height: 18px">arrow_forward</mat-icon>
-        </button>
-      </footer>
-    </article>
-  </form>
-</main>
+    </div>
+    <pre>
+Estado del formulario: {{ productForm.status }} | Errores: {{
+        productForm.get('categoryId')?.errors | json
+      }}</pre
+    >
+    <footer class="bento-actions">
+      <button type="button" class="btn-ghost" (click)="productForm.reset()">Limpiar</button>
+      <button type="submit" class="btn-primary" [disabled]="productForm.invalid">
+        <span>REGISTRAR PRODUCTO</span>
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </footer>
+  </article>
+</form>
