@@ -59,6 +59,8 @@ services:
       - ./backend_infrastructure/transaction_service:/app
       - /app/transaction_service/bin
       - /app/transaction_service/obj
+      - /app/transaction_service.data/bin
+      - /app/transaction_service.data/obj
     depends_on:
       db-transactions:
         condition: service_healthy
