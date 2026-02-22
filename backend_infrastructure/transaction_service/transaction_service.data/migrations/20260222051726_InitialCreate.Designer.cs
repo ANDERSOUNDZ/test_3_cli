@@ -12,7 +12,7 @@ using transaction_service.data.context;
 namespace transaction_service.data.migrations
 {
     [DbContext(typeof(TransactionDbContext))]
-    [Migration("20260222030719_InitialCreate")]
+    [Migration("20260222051726_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

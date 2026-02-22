@@ -66,6 +66,16 @@ namespace product_service.adapters.input.controllers.product
             }
         }
 
+        [HttpPut("update_stock/{id}/{quantity}/{isIncrement}")]
+        public async Task<IActionResult> UpdateStock(string id, int quantity, bool isIncrement, CancellationToken ct)
+        {
+            var result = await _executor.ExecuteAsync(id, quantity, isIncrement, ct);
+
+            if (!result) return BadRequest(new { message = "No se pudo actualizar el stock." });
+
+            return Ok(new { message = "Stock actualizado correctamente." });
+        }
+
         [HttpDelete("delete_product/{id}")]
         public async Task<IActionResult> Delete(
             string id,

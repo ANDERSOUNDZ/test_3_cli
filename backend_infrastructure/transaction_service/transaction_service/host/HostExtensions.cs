@@ -13,6 +13,7 @@ namespace transaction_service.host
             services.AddSwaggerDocumentation();
             services.AddRepositories();
             services.AddUseCases();
+            services.AddExternalClients(config);
             services.AddValidators();
             services.AddControllers();
 
@@ -20,7 +21,6 @@ namespace transaction_service.host
         }
         public static WebApplication UseHexagonal(this WebApplication app)
         {
-            //app.UseAutoMigrations();
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
