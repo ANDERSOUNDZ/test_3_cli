@@ -1,6 +1,4 @@
-﻿
-
-namespace product_service.domain.entities
+﻿namespace product_service.domain.entities
 {
     public class ProductEntity
     {

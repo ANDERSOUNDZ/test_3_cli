@@ -9,6 +9,7 @@ namespace transaction_service.host
         {
             var services = builder.Services;
             var config = builder.Configuration;
+            services.AddCorsConfiguration(config);
             services.AddDatabaseSetup(config);
             services.AddSwaggerDocumentation();
             services.AddRepositories();
@@ -35,7 +36,7 @@ namespace transaction_service.host
                 app.UseHsts();
                 app.UseHttpsRedirection();
             }
-
+            app.UseCors("_myAllowSpecificOrigins");
             app.UseAuthorization();
             app.MapControllers();
             return app;
