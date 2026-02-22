@@ -9,6 +9,8 @@ import { ProductService } from '../../../core/services/product-service';
 import { MatDialog } from '@angular/material/dialog';
 import { CheckoutModal } from '../../../shared/components/checkout-modal/checkout-modal';
 import { Product } from '../../../core/models/product';
+import { CategoryNamePipe } from '../../../shared/pipes/category-name-pipe';
+import { CategoryService } from '../../../core/services/category-service';
 
 @Component({
   selector: 'app-product-list',
@@ -19,6 +21,7 @@ import { Product } from '../../../core/models/product';
     MatIconModule,
     MatButtonModule,
     ProductCard,
+    CategoryNamePipe
   ],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
@@ -26,11 +29,10 @@ import { Product } from '../../../core/models/product';
 export class ProductList implements OnInit {
   productService = inject(ProductService);
   searchQuery = signal('');
-
-  // SOLUCIÓN 1: Permitir que el signal sea string O number
   selectedCategory = signal<string | number>('all');
 
   private dialog = inject(MatDialog);
+  private categoryService = inject(CategoryService);
 
   categories = computed(() => {
     const allCats = this.productService.products().map((p) => p.categoryId);
@@ -41,15 +43,12 @@ export class ProductList implements OnInit {
     let list = this.productService.products();
     const cat = this.selectedCategory();
 
-    // SOLUCIÓN 2: Recuperar el valor del search query
     const query = this.searchQuery().toLowerCase();
 
-    // Filtrado por categoría
     if (cat !== 'all') {
       list = list.filter((p) => p.categoryId === cat);
     }
 
-    // Filtrado por búsqueda
     if (query) {
       list = list.filter((p) => p.name.toLowerCase().includes(query));
     }
@@ -58,6 +57,7 @@ export class ProductList implements OnInit {
   });
 
   ngOnInit(): void {
+    this.categoryService.getAll();
     this.productService.getAll();
   }
 

@@ -10,6 +10,8 @@ import { Product } from '../../../core/models/product';
 import { ProductService } from '../../../core/services/product-service';
 import { Notification } from '../../../core/services/notification';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { CategoryNamePipe } from '../../../shared/pipes/category-name-pipe';
+import { CategoryService } from '../../../core/services/category-service';
 
 @Component({
   selector: 'app-product-admin',
@@ -23,6 +25,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
     MatButtonModule,
     RouterLink,
     CurrencyPipe,
+    CategoryNamePipe
   ],
   templateUrl: './product-admin.html',
   styleUrl: './product-admin.css',
@@ -30,7 +33,8 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 export class ProductAdmin implements OnInit {
   private productService = inject(ProductService);
   private notification = inject(Notification);
-
+  private categoryService = inject(CategoryService);
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   displayedColumns: string[] = ['image', 'name', 'category', 'price', 'stock', 'actions'];
@@ -47,6 +51,7 @@ export class ProductAdmin implements OnInit {
   }
 
   ngOnInit() {
+    this.categoryService.getAll();
     this.productService.getAll();
   }
 

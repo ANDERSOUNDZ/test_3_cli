@@ -13,13 +13,13 @@
       >
         Todos
       </button>
-      @for (cat of categories(); track cat) {
+      @for (category of categories(); track category) {
         <button
           class="pill"
-          [class.active]="selectedCategory() === cat"
-          (click)="selectedCategory.set(cat)"
+          [class.active]="selectedCategory() === category"
+          (click)="selectedCategory.set(category)"
         >
-          {{ cat }}
+          {{ category | categoryName }}
         </button>
       }
     </div>
