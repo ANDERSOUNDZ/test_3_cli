@@ -17,7 +17,7 @@ Proyectos similares: https://github.com/ANDERSOUNDZ/DOCKER_TEST1/ ( Angular / Sp
 
 ## Arquitectura de Contenedores
 ---
-![A02](./imagenes_proyecto/A02.png)
+![A02](././imagenes_proyecto/A02.png)
 ---
 
 Applicacion de administracion
