@@ -17,7 +17,7 @@ Proyectos similares: https://github.com/ANDERSOUNDZ/DOCKER_TEST1/ ( Angular / Sp
 
 ## Arquitectura de Contenedores
 ---
-![A02](imagenes_proyecto/A02.png)
+![A02](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A02.png)
 ---
 
 Applicacion de administracion
@@ -29,9 +29,9 @@ Referencias y Recursos:
 2.  https://www.codemotion.com/magazine/frontend/lets-create-a-bento-box-design-layout-using-modern-css/
 
 ---
-![A03](./imagenes_proyecto/A03.png)
+![A03](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A03.png)
 Backend / Hexagonal Architecture / Microservicios
-![A04](./imagenes_proyecto/A04.png)
+![A04](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A04.png)
 ---
 ## Instrucciones de Ejecución
 
@@ -85,7 +85,7 @@ Auth: SQL Server Authentication
 User: sa / Password: Transactions123*
 activar check SSL
 
-![A03](./imagenes_proyecto/A05.png) | ![A03](./imagenes_proyecto/A06.png)
+![A03](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A05.png) | ![A03](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A06.png)
 
 ----
 
@@ -94,7 +94,7 @@ Frontend - Backend
 ---
 Manejo de rama - Una sola anexado en el documento
 ---
-![1A](./imagenes_proyecto/A07.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A07.png)
 
 
 Funcionalidades Frontend:
@@ -104,19 +104,19 @@ Gestión de Productos.
 Panel de administración que permite: Crear productos, asignar precios, descripcion y cantidad de stock, editar los productos y sus parametros, eliminar productos y ver el producto.
 Al registrar producto, se registra una transaccion de compra inicial, de igual manera al editar el producto permite agregar producto, este toma siempre la diferencia del producto ingresa y lo registra para mantener stock.
 
-![1A](./imagenes_proyecto/A08.png)
-![1A](./imagenes_proyecto/A09.png)
-![1A](./imagenes_proyecto/A10.png)
-![1A](./imagenes_proyecto/A11.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A08.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A09.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A10.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A11.png)
 
 ---
 
 Pequeño modulo de categorias (Relacional pequeña):
 Registra, Edita, Elimina categorias para los productos.
 
-![1A](./imagenes_proyecto/A12.png)
-![1A](./imagenes_proyecto/A14.png)
-![1A](./imagenes_proyecto/A15.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A12.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A14.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A15.png)
 
 ---
 
@@ -124,52 +124,52 @@ Historial de transacciónes.
 
 Permite visualizar los registros de stock de productos, esta tabla muestra los registros de compra y venta de los productos, por cada producto que se vende o compra registra el porducto , fecha y cantidad, actualiza tanto cuando compra como vende el stock del producto.
 
-![1A](./imagenes_proyecto/A16.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A16.png)
 
 Se agrego un modal que permite visualizar toda la información de la transaccion, ya sea compra o venta, mas una descarga ne pdf de esa infromación: 
 
-![1A](./imagenes_proyecto/A17.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A17.png)
 
 Añadi una pequeña Dummy Store para poder hacerla interactiva, se puede comprar 1 producto o añadir otro producto.
 
-![1A](./imagenes_proyecto/A18.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A18.png)
 
 Al comprar, este ejecuta la accion de registro y guarda en la tabla de transacciones mientras actualiza el stock con una clase de fabrica en la entidad. 
 
-![1A](./imagenes_proyecto/A19.png)
-![1A](./imagenes_proyecto/A21.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A19.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A21.png)
 
 
 En el caso de que no exista producto envia una notificacio que ya no hay cupo o no existe stock no permite la compra y se muestra una notificacion en la pantalla.
 
-![1A](./imagenes_proyecto/A20.png)
-![1A](./imagenes_proyecto/A23.png)
-![1A](./imagenes_proyecto/A24.png)
-![1A](./imagenes_proyecto/A25.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A20.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A23.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A24.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A25.png)
 
 
 Funcionalidades Backend
 - Arquitectura hexagonal, Puertos / Adaptadores, Fluent Validation, SOLID, Partial Clases, Injection dependency.
 
-![1A](./imagenes_proyecto/A26.png) | ![1A](./imagenes_proyecto/A27.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A26.png) | ![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A27.png)
 
 - Registra transacciónes asyncronas mediante coneccion API REST /  HTTP Client
 
-![1A](./imagenes_proyecto/A31.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A31.png)
 
 Registra transacciónes y comparten proceso y almacenan: 
 
 1. Tabla Categoria
-![1A](./imagenes_proyecto/A30.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A30.png)
 2. Tabla Productos
-![1A](./imagenes_proyecto/A29.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A29.png)
 3. Tabla Transacciónes
-![1A](./imagenes_proyecto/A28.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A28.png)
 
 Orquestador Docker Estable
-![1A](./imagenes_proyecto/A32.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A32.png)
 
 Servicios levantados: 
-![1A](./imagenes_proyecto/A33.png)
+![1A](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A33.png)
 
 Es todo. :D
