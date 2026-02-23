@@ -1,7 +1,7 @@
 # Test 3 - Microservicio Infraestructure: Frontend / Backend
 
 ----
-![A01](./imagenes_proyecto/A01.png)
+![A01](./frontend_infrastructure/store_frontend/public/Imagenes_proyecto/A01.png)
 ----
 
 ## Tecnologías Utilizadas
