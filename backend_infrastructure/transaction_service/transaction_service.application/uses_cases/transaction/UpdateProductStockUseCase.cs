@@ -8,7 +8,7 @@ namespace transaction_service
         public async Task<(bool Success, string ProductName, string Message)> UpdateProductStockAsync(
             string productId, int quantity, string transactionType, CancellationToken cancellationToken)
         {
-            var responseGet = await _httpClient.GetAsync($"product_service/get_product/{productId}", cancellationToken);
+            var responseGet = await _httpClient.GetAsync($"get_product/{productId}", cancellationToken);
 
             if (!responseGet.IsSuccessStatusCode)
                 return (false, string.Empty, "Producto no encontrado.");
@@ -26,7 +26,7 @@ namespace transaction_service
             bool isIncrement = transactionType.ToLower() == "compra" || transactionType.ToLower() == "entrada";
 
             var responseUpdate = await _httpClient.PutAsync(
-                $"product_service/update_stock/{productId}/{quantity}/{isIncrement}",
+                $"update_stock/{productId}/{quantity}/{isIncrement}",
                 null,
                 cancellationToken);
 

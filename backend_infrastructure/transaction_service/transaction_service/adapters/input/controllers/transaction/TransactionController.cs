@@ -5,7 +5,7 @@ using transaction_service.ports.shared.enums;
 
 namespace transaction_service.adapters.input.controllers.transaction
 {
-    [Route("transaction_service/")]
+    [Route("/")]
     [ApiController]
     public class TransactionController : BaseController
     {
