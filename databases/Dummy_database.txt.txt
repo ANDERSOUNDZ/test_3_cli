@@ -1,0 +1,53 @@
+
+CREATE TABLE [dbo].[tb_category](
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+    [Name] [nvarchar](100) NOT NULL,
+    [Description] [nvarchar](500) NOT NULL,
+    CONSTRAINT [PK_tb_category] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[tb_product](
+    [Id] [nvarchar](36) NOT NULL,
+    [Name] [nvarchar](200) NOT NULL,
+    [Description] [nvarchar](1000) NOT NULL,
+    [Image] [nvarchar](500) NOT NULL,
+    [Price] [decimal](18, 2) NOT NULL,
+    [Stock] [int] NOT NULL,
+    [CategoryId] [int] NOT NULL,
+    CONSTRAINT [PK_tb_product] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+CREATE TABLE [dbo].[tb_transaction](
+    [Id] [varchar](36) NOT NULL, 
+    [Date] [datetime2](7) NOT NULL,
+    [TransactionType] [nvarchar](50) NOT NULL,
+    [ProductId] [varchar](36) NOT NULL, 
+    [ProductName] [nvarchar](200) NOT NULL,
+    [Quantity] [int] NOT NULL,
+    [UnitPrice] [decimal](18, 2) NOT NULL,
+    [TotalPrice] [decimal](18, 2) NOT NULL,
+    [Detail] [nvarchar](500) NOT NULL,
+    CONSTRAINT [PK_tb_transaction] PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+
+ALTER TABLE [dbo].[tb_product] WITH CHECK ADD CONSTRAINT [FK_tb_product_tb_category_CategoryId] 
+FOREIGN KEY([CategoryId]) REFERENCES [dbo].[tb_category] ([Id]);
+
+
+-- Insertar Categorías
+INSERT INTO [dbo].[tb_category] ([Name], [Description])
+VALUES 
+('Electrónica', 'Dispositivos y gadgets tecnológicos'),
+('Hogar', 'Artículos para el hogar y decoración');
+
+-- Insertar Productos (Relacionados a las categorías anteriores)
+INSERT INTO [dbo].[tb_product] ([Id], [Name], [Description], [Image], [Price], [Stock], [CategoryId])
+VALUES 
+('PROD-001', 'Smartphone X', 'Teléfono inteligente 128GB', 'img_phone.jpg', 599.99, 50, 1),
+('PROD-002', 'Cafetera Pro', 'Cafetera automática express', 'img_coffee.jpg', 89.50, 20, 2);
+
+-- Insertar Transacciones (Independiente, sin llaves foráneas)
+INSERT INTO [dbo].[tb_transaction] ([Id], [Date], [TransactionType], [ProductId], [ProductName], [Quantity], [UnitPrice], [TotalPrice], [Detail])
+VALUES 
+('TRX-1001', GETDATE(), 'Venta', 'PROD-001', 'Smartphone X', 1, 599.99, 599.99, 'Venta directa en mostrador'),
+('TRX-1002', GETDATE(), 'Venta', 'PROD-002', 'Cafetera Pro', 2, 89.50, 179.00, 'Pedido online #455');
