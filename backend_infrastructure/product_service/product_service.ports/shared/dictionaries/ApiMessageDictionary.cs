@@ -15,7 +15,9 @@ namespace product_service.ports.shared.dictionaries
             [ApiMessage.ValidationError] = "Error de validación.",
             [ApiMessage.InternalServerError] = "Error interno del servidor.",
             [ApiMessage.BadRequestCategory] = "No se encontró la categoría solicitada.",
-            
+            [ApiMessage.BadRequestDeleteCategory] = "No se pudo eliminar. Categoria no encontrado.",
+            [ApiMessage.DeleteCategorySuccess] = "Categoria eliminada correctamente.",
+            [ApiMessage.UpdateCategorySuccess] = "Categoria actualizada correctamente.",
         };
         public static string GetMessage(this ApiMessage message)
             => Messages.TryGetValue(message, out var msg) ? msg : "Mensaje no definido.";

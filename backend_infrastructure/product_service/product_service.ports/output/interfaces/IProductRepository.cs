@@ -4,10 +4,10 @@ namespace product_service
 {
     public partial interface IProductRepository
     {
-        Task<ProductEntity?> GetByIdAsync(string id, CancellationToken cancellationToken);
-        Task<IEnumerable<ProductEntity>> GetAllAsync(int? category, string? name, CancellationToken cancellationToken);
-        Task AddAsync(ProductEntity product, CancellationToken cancellationToken);
-        Task UpdateAsync(ProductEntity product, CancellationToken cancellationToken);
-        Task DeleteAsync(string id, CancellationToken cancellationToken);
+        Task<IEnumerable<ProductEntity>> GetAllProductsAsync(int? category, string? name, CancellationToken cancellationToken);
+        Task<ProductEntity?> GetProductByIdAsync(string id, CancellationToken cancellationToken);
+        Task AddProductAsync(ProductEntity product, CancellationToken cancellationToken);
+        Task UpdateProductAsync(ProductEntity product, CancellationToken cancellationToken);
+        Task DeleteProductAsync(string id, CancellationToken cancellationToken);
     }
 }

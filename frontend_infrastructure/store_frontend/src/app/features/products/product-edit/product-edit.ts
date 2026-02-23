@@ -7,6 +7,7 @@ import { ProductService } from '../../../core/services/product-service';
 import { Notification } from '../../../core/services/notification';
 import { CategoryService } from '../../../core/services/category-service';
 import { CategoryNamePipe } from '../../../shared/pipes/category-name-pipe';
+import { TransactionService } from '../../../core/services/transaction-service';
 
 @Component({
   selector: 'app-product-edit',
@@ -21,12 +22,16 @@ export class ProductEdit implements OnInit {
   private productService = inject(ProductService);
   private notification = inject(Notification);
   private categoryService = inject(CategoryService);
+  private transactionService = inject(TransactionService);
 
   editForm!: FormGroup;
   productId = signal<string | null>(null);
   imagePreview = signal<string>('img/00.png');
   isLoading = this.categoryService.loading;
   categories = this.categoryService.categories;
+  
+  // NUEVO: Para validar que no bajen el stock
+  originalStock = signal<number>(0);
 
   ngOnInit() {
     this.categoryService.getAll();
@@ -54,6 +59,7 @@ export class ProductEdit implements OnInit {
       next: (res) => {
         this.editForm.patchValue(res.data);
         this.imagePreview.set(res.data.image);
+        this.originalStock.set(res.data.stock); // Guardamos valor original
       },
       error: () => this.notification.notify('No se pudo cargar el producto', true),
     });
@@ -71,9 +77,30 @@ export class ProductEdit implements OnInit {
 
   onSubmit() {
     if (this.editForm.valid && this.productId()) {
+      const newStock = this.editForm.get('stock')?.value;
+      const oldStock = this.originalStock();
+
+      // VALIDACIÓN: No se puede retirar producto desde aquí
+      if (newStock < oldStock) {
+        this.notification.notify(`No puedes reducir el stock. El valor mínimo es ${oldStock}`, true);
+        return;
+      }
+
       this.productService.update(this.productId()!, this.editForm.value).subscribe({
         next: () => {
-          this.notification.notify('Producto actualizado con éxito');
+          // LÓGICA DE TRANSACCIÓN POR AUMENTO
+          if (newStock > oldStock) {
+            const diferencia = newStock - oldStock;
+            this.transactionService.register({
+              transactionType: 'Compra',
+              productId: this.productId()!,
+              quantity: diferencia,
+              unitPrice: this.editForm.get('price')?.value,
+              detail: `Ingreso manual de mercadería: +${diferencia} unidades`
+            }).subscribe();
+          }
+
+          this.notification.notify('Producto actualizado y stock sincronizado');
           this.router.navigate(['/admin']);
         },
         error: () => this.notification.notify('Error al actualizar', true),

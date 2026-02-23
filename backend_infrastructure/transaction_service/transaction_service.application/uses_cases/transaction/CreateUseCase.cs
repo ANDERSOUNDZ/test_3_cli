@@ -29,7 +29,7 @@ namespace transaction_service
                 Detail = request.Detail
             };
 
-            await _transactionRepository.AddAsync(entity, cancellationToken);
+            await _transactionRepository.AddTransactionAsync(entity, cancellationToken);
             return entity.Id;
         }        
     }

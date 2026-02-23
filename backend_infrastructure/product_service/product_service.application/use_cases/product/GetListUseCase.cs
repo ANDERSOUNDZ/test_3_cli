@@ -10,7 +10,7 @@ namespace product_service
             int pageSize = request.PageSize > 15 ? 15 : (request.PageSize <= 0 ? 15 : request.PageSize);
             int skip = (request.Page - 1) * pageSize;
 
-            var products = await _productRepository.GetAllAsync(request.CategoryId, request.Name, cancellationToken);
+            var products = await _productRepository.GetAllProductsAsync(request.CategoryId, request.Name, cancellationToken);
 
             return products
                 .Skip(skip)

@@ -15,6 +15,28 @@ namespace transaction_service.adapters.input.controllers.transaction
             _executor = executor;
         }
 
+        [HttpGet("list_transactions")]
+        public async Task<IActionResult> GetHistory(
+            [FromQuery] TransactionFilterRequest request,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _executor.ExecuteAsync(request, cancellationToken);
+            return OkResponse(result);
+        }
+
+        [HttpGet("get_transaction/{id}")]
+        public async Task<IActionResult> GetById(
+            string id,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _executor.ExecuteAsync(new GetTransactionRequest(id), cancellationToken);
+
+            if (result == null)
+                return BadRequestResponse(ApiMessage.BadRequestTransaction);
+
+            return OkResponse(result);
+        }
+
         [HttpPost("register_transaction")]
         [ServiceFilter(typeof(ValidationFilter<TransactionRequest>))]
         public async Task<IActionResult> Create(
@@ -34,15 +56,6 @@ namespace transaction_service.adapters.input.controllers.transaction
             {
                 return InternalErrorResponse(ex);
             }
-        }
-
-        [HttpGet("list_transactions")]
-        public async Task<IActionResult> GetHistory(
-            [FromQuery] TransactionFilterRequest request,
-            CancellationToken cancellationToken = default)
-        {
-            var result = await _executor.ExecuteAsync(request, cancellationToken);
-            return OkResponse(result);
-        }
+        }        
     }
 }

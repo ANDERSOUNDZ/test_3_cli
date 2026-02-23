@@ -6,6 +6,7 @@
         OperationSuccess = 2,
         BadRequest = 3,
         ValidationError = 4,
-        InternalServerError = 5
+        InternalServerError = 5,
+        BadRequestTransaction = 6,
     }
 }

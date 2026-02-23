@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatIcon } from '@angular/material/icon';
 import { Product } from '../../../core/models/product';
 import { CategoryService } from '../../../core/services/category-service';
+import { TransactionService } from '../../../core/services/transaction-service';
 
 @Component({
   selector: 'app-product-form',
@@ -20,6 +21,7 @@ export class ProductForm implements OnInit {
   private categoryService = inject(CategoryService);
   private notification = inject(Notification);
   private router = inject(Router);
+  private transactionService = inject(TransactionService);
 
   imagePreview: string | null = null;
   selectedFileName: string = '';
@@ -28,8 +30,6 @@ export class ProductForm implements OnInit {
   isLoading = this.categoryService.loading;
 
   ngOnInit() {
-    console.log("Holaaaa");
-    
     this.productForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
       description: ['', [Validators.required]],
@@ -37,7 +37,7 @@ export class ProductForm implements OnInit {
       image: ['', [Validators.maxLength(500)]],
       price: [0.01, [Validators.required, Validators.min(0.01)]],
       stock: [1, [Validators.required, Validators.min(0)]],
-    });    
+    });
     this.categoryService.getAll();
   }
 
@@ -48,26 +48,46 @@ export class ProductForm implements OnInit {
       const productData: Partial<Product> = {
         name: rawValue.name,
         description: rawValue.description,
-        categoryId: Number(rawValue.categoryId), // Aseguramos que sea número
+        categoryId: Number(rawValue.categoryId),
         price: rawValue.price,
         stock: rawValue.stock,
         image: 'img/' + (rawValue.image || '00.png'),
       };
 
-      console.log('Enviando producto al servidor:', productData);
-
       this.productService.create(productData).subscribe({
-        next: () => {
-          this.notification.notify('¡Producto registrado con éxito!');
-          this.router.navigate(['/products']);
+        next: (response) => {
+          // SEGÚN TU CONSOLA: data es directamente el string del ID
+          const newProductId = response.data;
+
+          console.log('ID capturado para transacción:', newProductId);
+
+          if (newProductId && productData.stock && productData.stock > 0) {
+            this.transactionService
+              .register({
+                transactionType: 'Compra',
+                productId: newProductId, // Ahora sí enviamos el string correcto
+                quantity: productData.stock,
+                unitPrice: productData.price,
+                detail: `Carga inicial de stock: ${productData.name}`,
+              })
+              .subscribe({
+                next: () => {
+                  this.notification.notify('¡Producto y Stock inicial registrados!');
+                  this.router.navigate(['/admin']);
+                },
+                error: (err) => {
+                  console.error('Error en transacción:', err);
+                  this.notification.notify('Producto creado, pero error al registrar stock', true);
+                  this.router.navigate(['/admin']);
+                },
+              });
+          } else {
+            this.notification.notify('Producto creado sin stock o ID no encontrado');
+            this.router.navigate(['/admin']);
+          }
         },
         error: (err) => {
-          console.error('Error del servidor:', err);
-          this.notification.notify('Error al guardar: Verifica que la categoría sea válida.', true);
-          
-          if (err.originalError?.error?.errors) {
-            this.markServerErrors(err.originalError.error.errors);
-          }
+          this.notification.notify('Error al crear el producto', true);
         },
       });
     } else {
@@ -77,7 +97,6 @@ export class ProductForm implements OnInit {
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
-
     if (file) {
       const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
       if (!allowedTypes.includes(file.type)) {
@@ -88,14 +107,10 @@ export class ProductForm implements OnInit {
         this.notification.notify('La imagen no debe superar los 2MB', true);
         return;
       }
-
       this.selectedFileName = file.name;
       this.productForm.patchValue({ image: file.name });
-
       const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result as string;
-      };
+      reader.onload = () => (this.imagePreview = reader.result as string);
       reader.readAsDataURL(file);
     }
   }

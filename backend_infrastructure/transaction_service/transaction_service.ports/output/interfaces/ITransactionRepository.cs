@@ -4,7 +4,8 @@ namespace transaction_service
 {
     public partial interface ITransactionRepository
     {
-        Task AddAsync(TransactionEntity entity, CancellationToken cancellationToken);
-        Task<IEnumerable<TransactionEntity>> GetFilteredAsync(DateTime? start, DateTime? end, string? type, CancellationToken cancellationToken);
+        Task<IEnumerable<TransactionEntity>> GetFilteredTransactionAsync(DateTime? start, DateTime? end, string? type, CancellationToken cancellationToken);
+        Task AddTransactionAsync(TransactionEntity entity, CancellationToken cancellationToken);
+        Task<TransactionEntity?> GetTransactionByIdAsync(string id, CancellationToken cancellationToken);
     }
 }

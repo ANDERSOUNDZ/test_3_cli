@@ -22,5 +22,19 @@ namespace product_service
             await _context.Categories.AddAsync(category, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
         }
+        public async Task UpdateCategoryAsync(CategoryEntity category, CancellationToken cancellationToken)
+        {
+            _context.Categories.Update(category);
+            await _context.SaveChangesAsync(cancellationToken);
+        }
+        public async Task DeleteCategoryAsync(int id, CancellationToken cancellationToken)
+        {
+            var category = await GetByIdCategoryAsync(id, cancellationToken);
+            if (category != null)
+            {
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync(cancellationToken);
+            }
+        }
     }
 }

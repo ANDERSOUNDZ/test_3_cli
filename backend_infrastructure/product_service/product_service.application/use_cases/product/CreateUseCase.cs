@@ -17,7 +17,7 @@ namespace product_service
                 Price = request.Price,
                 Stock = request.Stock
             };
-            await _productRepository.AddAsync(entity, cancellationToken);
+            await _productRepository.AddProductAsync(entity, cancellationToken);
             return entity.Id;
         }
     }

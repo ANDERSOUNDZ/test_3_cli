@@ -8,5 +8,7 @@ namespace product_service
         Task<IEnumerable<CategoryResponse>> ExecuteAsync(CancellationToken cancellationToken);
         Task<CategoryResponse> ExecuteAsync(GetCategoryRequest id, CancellationToken cancellationToken);
         Task<string> ExecuteAsync(CategoryRequest request, CancellationToken cancellationToken);
+        Task<bool> ExecuteAsync(int id, CategoryRequest request, CancellationToken cancellationToken);
+        Task<bool> ExecuteAsync(DeleteCategoryRequest request, CancellationToken cancellationToken);
     }
 }

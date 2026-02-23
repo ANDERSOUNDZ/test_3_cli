@@ -63,7 +63,16 @@
           </div>
           <div class="input-group">
             <label>Stock Actual</label>
-            <input formControlName="stock" type="number" />
+            <input
+              formControlName="stock"
+              type="number"
+              [class.input-error]="editForm.get('stock')?.value < originalStock()"
+            />
+            @if (editForm.get('stock')?.value < originalStock()) {
+              <small class="error-text" style="color: #ff5555; font-size: 10px">
+                Stock Fijo, no se puede reducir, (Mínimo: {{ originalStock() }})
+              </small>
+            }
           </div>
         </div>
 

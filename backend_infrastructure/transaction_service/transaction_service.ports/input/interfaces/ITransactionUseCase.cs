@@ -7,5 +7,6 @@ namespace transaction_service
     {
         Task<string> ExecuteAsync(TransactionRequest request, CancellationToken cancellationToken);
         Task<IEnumerable<TransactionResponse>> ExecuteAsync(TransactionFilterRequest filter, CancellationToken cancellationToken);
+        Task<TransactionResponse?> ExecuteAsync(GetTransactionRequest request, CancellationToken cancellationToken);
     }
 }

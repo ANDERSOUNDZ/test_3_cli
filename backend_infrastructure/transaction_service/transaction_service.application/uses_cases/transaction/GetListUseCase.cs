@@ -7,7 +7,7 @@ namespace transaction_service
     {
         public async Task<IEnumerable<TransactionResponse>> ExecuteAsync(TransactionFilterRequest filter, CancellationToken cancellationToken)
         {
-            var data = await _transactionRepository.GetFilteredAsync(filter.StartDate, filter.EndDate, filter.Type, cancellationToken);
+            var data = await _transactionRepository.GetFilteredTransactionAsync(filter.StartDate, filter.EndDate, filter.Type, cancellationToken);
 
             return data
                 .Skip((filter.Page - 1) * filter.PageSize)
