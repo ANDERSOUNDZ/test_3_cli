@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using product_service.adapters.input.filters;
 using product_service.ports.dtos.request.category;
-using product_service.ports.dtos.request.product;
 using product_service.ports.shared.enums;
 
 namespace product_service.adapters.input.controllers.category
@@ -23,7 +22,7 @@ namespace product_service.adapters.input.controllers.category
             return OkResponse(result);
         }
 
-        [HttpGet("get_categoryt/{id}")]
+        [HttpGet("get_category/{id}")]
         public async Task<IActionResult> GetById(
             int id,
             CancellationToken cancellationToken = default)

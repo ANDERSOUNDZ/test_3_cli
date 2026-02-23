@@ -35,6 +35,10 @@ export class TransactionService {
       });
   }
 
+  getById(id: string): Observable<{ data: Transaction }> {
+    return this.http.get<{ data: Transaction }>(`${this.apiUrl}/get_transaction/${id}`);
+  }
+
   register(transaction: Partial<Transaction>): Observable<any> {
     this._loading.set(true);
     return this.http.post(`${this.apiUrl}/register_transaction`, transaction).pipe(

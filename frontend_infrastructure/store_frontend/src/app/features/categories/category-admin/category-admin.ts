@@ -1,4 +1,4 @@
-import { Component, effect, inject, ViewChild } from '@angular/core';
+import { Component, effect, inject, OnInit, ViewChild } from '@angular/core';
 import { CategoryService } from '../../../core/services/category-service';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
@@ -28,7 +28,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './category-admin.html',
   styleUrl: './category-admin.css',
 })
-export class CategoryAdmin {
+export class CategoryAdmin implements OnInit {
   private categoryService = inject(CategoryService);
   private notification = inject(Notification);
 
@@ -36,6 +36,8 @@ export class CategoryAdmin {
 
   displayedColumns: string[] = ['id', 'name', 'description', 'actions'];
   dataSource = new MatTableDataSource<Category>([]);
+  categories = this.categoryService.categories;
+  isLoading = this.categoryService.loading;
 
   constructor() {
     effect(() => {
@@ -59,9 +61,13 @@ export class CategoryAdmin {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  deleteCategory(id: number) {
-    if (confirm('¿Estás seguro? Esto podría afectar a los productos asociados.')) {
-      this.notification.notify('Funcionalidad de borrado en desarrollo', true);
+  onDelete(id: number) {
+    if (confirm('¿Estás seguro de eliminar esta categoría?')) {
+      // Necesitas agregar el método delete en tu CategoryService
+      this.categoryService.delete(id).subscribe({
+        next: () => this.notification.notify('Categoría eliminada'),
+        error: () => this.notification.notify('No se puede eliminar: tiene productos asociados', true)
+      });
     }
   }
 }
