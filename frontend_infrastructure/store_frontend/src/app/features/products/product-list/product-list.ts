@@ -7,7 +7,6 @@ import { MatInputModule } from '@angular/material/input';
 import { ProductCard } from '../product-card/product-card';
 import { ProductService } from '../../../core/services/product-service';
 import { MatDialog } from '@angular/material/dialog';
-import { CheckoutModal } from '../../../shared/components/checkout-modal/checkout-modal';
 import { Product } from '../../../core/models/product';
 import { CategoryNamePipe } from '../../../shared/pipes/category-name-pipe';
 import { CategoryService } from '../../../core/services/category-service';
@@ -64,12 +63,5 @@ export class ProductList implements OnInit {
   onSearch(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchQuery.set(value);
-  }
-
-  openCheckoutFromList(product: Product) {
-    this.dialog.open(CheckoutModal, {
-      data: product,
-      panelClass: 'custom-bento-dialog',
-    });
-  }
+  }  
 }

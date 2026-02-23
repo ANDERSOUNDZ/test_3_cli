@@ -17,15 +17,19 @@
     <nav class="nav-pills">
       <a class="nav-item" routerLink="/products" routerLinkActive="active-item">
         <mat-icon>grid_view</mat-icon>
-        <span>Tienda</span>
+        <span>Productos</span>
       </a>
       <a class="nav-item" routerLink="/admin" routerLinkActive="active-item">
         <mat-icon>list</mat-icon>
         <span>Administrador de Productos</span>
       </a>
+      <a class="nav-item" routerLink="/categories" routerLinkActive="active-item">
+        <mat-icon>category</mat-icon>
+        <span>Administrador de Categorías</span>
+      </a>
       <a class="nav-item" routerLink="/transactions" routerLinkActive="active-item">
         <mat-icon>swap_vert</mat-icon>
-        <span>Movimiento de tienda</span>
+        <span>Transacciónes de productos</span>
       </a>
     </nav>
   </mat-sidenav>
@@ -38,6 +42,19 @@
         </button>
       }
       <span class="view-title">Ferreteria Digital</span>
+
+      <button
+        mat-flat-button
+        routerLink="/checkout"
+        class="cart-pill-button"
+        [matBadge]="cartService.totalItems()"
+        [matBadgeHidden]="cartService.totalItems() === 0"
+        matBadgeSize="small"
+        matBadgeColor="warn"
+      >
+        <mat-icon>shopping_cart</mat-icon>
+        <span class="cart-label"> Carrito</span>
+      </button>
     </mat-toolbar>
 
     <div class="content-wrapper">

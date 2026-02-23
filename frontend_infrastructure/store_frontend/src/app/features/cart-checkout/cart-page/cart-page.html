@@ -1,0 +1,63 @@
+<main class="cart-container">
+  <header class="cart-header">
+    <button class="back-pill" routerLink="/products">
+      <mat-icon>arrow_back</mat-icon>
+      <span>Seguir comprando</span>
+    </button>
+    <h2 class="title-gradient">Resumen de tu Pedido</h2>
+  </header>
+
+  <div class="cart-grid">
+    <section class="bento-card items-zone">
+      <div class="items-header">
+        <span>Producto</span>
+        <span>Cantidad</span>
+        <span>Subtotal</span>
+        <span></span>
+      </div>
+
+      @for (item of cartService.items(); track item.id) {
+        <div class="cart-item">
+          <div class="item-info">
+            <img [src]="item.image" alt="img" />
+            <div>
+              <strong>{{ item.name }}</strong>
+              <small>{{ item.price | currency }} / ud</small>
+            </div>
+          </div>
+          <div class="item-qty">{{ item.quantity }}</div>
+          <div class="item-subtotal">{{ item.price * item.quantity | currency }}</div>
+          <button class="delete-btn" (click)="cartService.removeItem(item.id)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </div>
+      } @empty {
+        <div class="empty-cart">
+          <mat-icon>shopping_cart</mat-icon>
+          <p>Tu carrito está vacío (Máx 10 productos)</p>
+        </div>
+      }
+    </section>
+
+    <section class="bento-card summary-zone">
+      <h3>Resumen de Pago</h3>
+      <div class="summary-line">
+        <span>Productos:</span>
+        <span>{{ cartService.totalItems() }} / 10</span>
+      </div>
+      <div class="summary-total">
+        <small>TOTAL FINAL</small>
+        <strong>{{ cartService.totalPrice() | currency }}</strong>
+      </div>
+
+      <button
+        class="confirm-btn"
+        [disabled]="cartService.totalItems() === 0"
+        (click)="confirmOrder()"
+      >
+        CONFIRMAR COMPRA
+        <mat-icon>check_circle</mat-icon>
+      </button>
+    </section>
+  </div>
+</main>

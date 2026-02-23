@@ -215,7 +215,7 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 18px;
   padding: 16px 20px;
-  color: #fff; /* Texto blanco para el valor seleccionado */
+  color: #fff;
   font-size: 1rem;
   cursor: pointer;
   appearance: none;
@@ -226,8 +226,8 @@
 }
 
 .input-glass select option {
-  background-color: #1a1a1a; /* Fondo oscuro sólido para la lista */
-  color: #fff;               /* Texto blanco */
+  background-color: #1a1a1a;
+  color: #fff;  
   padding: 10px;
 }
 .input-glass select option:disabled {

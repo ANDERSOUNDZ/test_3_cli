@@ -28,10 +28,7 @@
   <div class="bento-grid">
     @for (item of filteredProducts(); track item.id) {
       <div class="bento-item">
-        <app-product-card
-          [product]="item"
-          (onBuy)="openCheckoutFromList($event)"
-        ></app-product-card>
+        <app-product-card [product]="item"></app-product-card>
       </div>
     }
   </div>

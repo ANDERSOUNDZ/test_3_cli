@@ -27,16 +27,29 @@
         </div>
 
         <div class="row">
-          <div class="input-group">
+          <div class="input-glass">
             <label>Categoría</label>
-            <input formControlName="category" type="text" placeholder="Construcción" />
+            @if (isLoading()) {
+              <div class="spinner">Cargando...</div>
+            } @else {
+              <select formControlName="categoryId">
+                <option [ngValue]="null" disabled>Seleccionar...</option>
+                @for (item of categories(); track item.id) {
+                  <option [ngValue]="item.id">{{ item.name }}</option>
+                }
+              </select>
+            }
+            @if (editForm.get('categoryId')?.invalid && editForm.get('categoryId')?.touched) {
+              <span class="error-text">Selecciona una categoría</span>
+            }
           </div>
-          <div class="input-group">
+
+          <div class="image-upload-container">
             <label>Imagen del Producto</label>
             <div class="upload-wrapper">
-              <div class="btn-upload-styled">
-                <mat-icon>image</mat-icon>
-                <span>Cambiar Foto</span>
+              <div class="modern-upload-btn">
+                <mat-icon>add_photo_alternate</mat-icon>
+                <span>Subir nueva imagen</span>
               </div>
               <input type="file" (change)="onFileSelected($event)" accept="image/*" />
             </div>
@@ -67,9 +80,8 @@
       <div class="live-preview-card">
         <img [src]="imagePreview()" class="preview-img" />
         <div class="preview-info">
-          <span class="preview-cat">{{ editForm.get('category')?.value || 'Categoría' }}</span>
+          <span class="preview-cat">{{ editForm.get('categoryId')?.value | categoryName }}</span>
           <h3>{{ editForm.get('name')?.value || 'Nombre del Producto' }}</h3>
-          <p class="preview-price">{{ editForm.get('price')?.value | currency }}</p>
           <div class="preview-stock">
             En inventario: {{ editForm.get('stock')?.value }} unidades
           </div>

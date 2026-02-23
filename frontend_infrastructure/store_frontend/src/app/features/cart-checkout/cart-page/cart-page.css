@@ -1,0 +1,76 @@
+.cart-container { padding: 40px; max-width: 1200px; margin: 0 auto; }
+.cart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 30px; }
+
+.cart-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 15px; background: rgba(255,255,255,0.03);
+  border-radius: 18px; margin-bottom: 12px;
+}
+
+.item-info { display: flex; align-items: center; gap: 15px; }
+.item-info img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
+
+.delete-btn { background: transparent; color: #ff5555; border: none; cursor: pointer; }
+
+.summary-total {
+  margin: 30px 0; padding: 20px;
+  background: #fff; color: #000;
+  border-radius: 20px; text-align: center;
+}
+
+.confirm-btn {
+  width: 100%; padding: 20px; border-radius: 15px;
+  background: #3b82f6; color: white; border: none;
+  font-weight: 800; cursor: pointer;
+}
+.confirm-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* Contenedor del header para alinear elementos */
+.cart-header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* El botón de volver estilo "Píldora Bento" */
+.back-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.05); /* Fondo sutil */
+  backdrop-filter: blur(10px); /* Efecto cristal */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px; /* Forma de cápsula */
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.back-pill mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+/* Efectos al pasar el mouse */
+.back-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-5px); /* Pequeño salto a la izquierda para indicar "atrás" */
+  border-color: #3b82f6; /* Brillo azul para feedback visual */
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+/* Título con gradiente para que resalte */
+.title-gradient {
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin: 0;
+  background: linear-gradient(to right, #fff, #888);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

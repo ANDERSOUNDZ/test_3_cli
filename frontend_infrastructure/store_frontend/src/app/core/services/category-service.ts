@@ -9,7 +9,7 @@ import { Observable, tap } from 'rxjs';
 })
 export class CategoryService {
   private http = inject(HttpClient);
-  private apiUrl = environment.productsUrl; 
+  private apiUrl = environment.productsUrl;
 
   private _categories = signal<Category[]>([]);
   private _loading = signal<boolean>(false);
@@ -24,15 +24,16 @@ export class CategoryService {
 
   getAll(): void {
     this._loading.set(true);
-    this.http
-      .get<{ data: Category[] }>(`${this.apiUrl}/list_categories`)
-      .subscribe({
-        next: (response) => {
-          this._categories.set(response.data);
-        },
-        error: () => this._loading.set(false),
-        complete: () => this._loading.set(false),
-      });
+    this.http.get<{ data: Category[] }>(`${this.apiUrl}/list_categories`).subscribe({
+      next: (response) => {
+        this._categories.set(response.data);
+      },
+      error: () => this._loading.set(false),
+      complete: () => this._loading.set(false),
+    });
+  }
+  getById(id: number): Observable<{ data: Category }> {
+    return this.http.get<{ data: Category }>(`${this.apiUrl}/get_category/${id}`);
   }
 
   create(category: Partial<Category>): Observable<any> {
@@ -44,7 +45,9 @@ export class CategoryService {
     );
   }
 
-  getById(id: number): Observable<{ data: Category }> {
-    return this.http.get<{ data: Category }>(`${this.apiUrl}/get_category/${id}`);
+  update(id: number, category: Partial<Category>): Observable<any> {
+    return this.http
+      .put(`${this.apiUrl}/update_category/${id}`, category)
+      .pipe(tap(() => this.getAll()));
   }
 }

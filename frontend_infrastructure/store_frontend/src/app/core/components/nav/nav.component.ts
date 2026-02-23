@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {MatBadgeModule} from '@angular/material/badge';
+import { CartService } from '../../services/cart-service';
 
 @Component({
   selector: 'app-nav',
@@ -23,11 +25,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
     AsyncPipe,
     RouterOutlet,
     RouterLink,
-    RouterLinkActive
+    RouterLinkActive,
+    MatBadgeModule
   ]
 })
 export class NavComponent {
   private breakpointObserver = inject(BreakpointObserver);
+  public cartService = inject(CartService);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

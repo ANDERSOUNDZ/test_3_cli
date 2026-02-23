@@ -51,7 +51,7 @@ export class ProductForm implements OnInit {
         categoryId: Number(rawValue.categoryId), // Aseguramos que sea número
         price: rawValue.price,
         stock: rawValue.stock,
-        image: 'img/' + (rawValue.image || 'default.png'),
+        image: 'img/' + (rawValue.image || '00.png'),
       };
 
       console.log('Enviando producto al servidor:', productData);

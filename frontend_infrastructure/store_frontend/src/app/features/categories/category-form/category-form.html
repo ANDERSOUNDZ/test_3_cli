@@ -1,0 +1,33 @@
+<main class="edit-container">
+  <header class="edit-header">
+    <div class="header-info">
+      <button class="back-pill" routerLink="/categories">
+        <mat-icon>arrow_back</mat-icon> Volver
+      </button>
+      <h2 class="title-gradient">{{ categoryId() ? 'Editar' : 'Nueva' }} Categoría</h2>
+    </div>
+  </header>
+
+  <div class="single-card-center"> <section class="bento-card">
+      <form [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+        <div class="input-group">
+          <label>Nombre de la Categoría</label>
+          <input formControlName="name" type="text" placeholder="Ej. Electricidad" />
+          @if (categoryForm.get('name')?.invalid && categoryForm.get('name')?.touched) {
+            <span class="error-text">El nombre es obligatorio</span>
+          }
+        </div>
+
+        <div class="input-group">
+          <label>Descripción General</label>
+          <textarea formControlName="description" rows="4" placeholder="¿Qué tipo de productos incluye?"></textarea>
+        </div>
+
+        <button type="submit" class="save-btn" [disabled]="categoryForm.invalid || isLoading()">
+          <span>{{ categoryId() ? 'GUARDAR CAMBIOS' : 'CREAR CATEGORÍA' }}</span>
+          <mat-icon>{{ categoryId() ? 'check_circle' : 'add_circle' }}</mat-icon>
+        </button>
+      </form>
+    </section>
+  </div>
+</main>
