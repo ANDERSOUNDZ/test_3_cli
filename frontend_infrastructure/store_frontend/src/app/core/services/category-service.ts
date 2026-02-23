@@ -50,7 +50,7 @@ export class CategoryService {
       .put(`${this.apiUrl}/update_category/${id}`, category)
       .pipe(tap(() => this.getAll()));
   }
-  
+
   delete(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/delete_category/${id}`).pipe(tap(() => this.getAll()));
   }

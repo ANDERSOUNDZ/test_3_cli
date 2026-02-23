@@ -15,5 +15,6 @@
         BadRequestDeleteCategory = 11,
         DeleteCategorySuccess = 12,
         UpdateCategorySuccess = 13,
+        BadRequestStock = 14,
     }
 }

@@ -18,6 +18,7 @@ namespace product_service.ports.shared.dictionaries
             [ApiMessage.BadRequestDeleteCategory] = "No se pudo eliminar. Categoria no encontrado.",
             [ApiMessage.DeleteCategorySuccess] = "Categoria eliminada correctamente.",
             [ApiMessage.UpdateCategorySuccess] = "Categoria actualizada correctamente.",
+            [ApiMessage.BadRequestStock] = "Stock insuficiente, verifique con administración.",
         };
         public static string GetMessage(this ApiMessage message)
             => Messages.TryGetValue(message, out var msg) ? msg : "Mensaje no definido.";

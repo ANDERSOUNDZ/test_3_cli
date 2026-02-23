@@ -71,7 +71,7 @@ namespace product_service.adapters.input.controllers.product
         {
             var result = await _executor.ExecuteAsync(id, quantity, isIncrement, ct);
 
-            if (!result) return BadRequest(new { message = "No se pudo actualizar el stock." });
+            if (!result) return BadRequest(ApiMessage.BadRequestStock);
 
             return Ok(new { message = "Stock actualizado correctamente." });
         }

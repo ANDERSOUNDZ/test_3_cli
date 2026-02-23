@@ -60,11 +60,6 @@
         </div>
       </div>
     </div>
-    <pre>
-Estado del formulario: {{ productForm.status }} | Errores: {{
-        productForm.get('categoryId')?.errors | json
-      }}</pre
-    >
     <footer class="bento-actions">
       <button type="button" class="btn-ghost" (click)="productForm.reset()">Limpiar</button>
       <button type="submit" class="btn-primary" [disabled]="productForm.invalid">
